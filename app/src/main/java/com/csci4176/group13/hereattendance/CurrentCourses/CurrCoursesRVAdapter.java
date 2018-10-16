@@ -1,5 +1,6 @@
-package com.csci4176.group13.hereattendance.currentcourses;
+package com.csci4176.group13.hereattendance.CurrentCourses;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.csci4176.group13.hereattendance.ClassAttendanceActivity;
 import com.csci4176.group13.hereattendance.R;
 
 import java.util.List;
@@ -46,7 +48,15 @@ public class CurrCoursesRVAdapter extends RecyclerView.Adapter<CurrCoursesRVAdap
             code = (TextView) view.findViewById(R.id.code);
             name = (TextView) view.findViewById(R.id.name);
             attendancePercentage = (TextView) view.findViewById(R.id.attendancePercent);
-            // set on click here
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    Intent intent = new Intent(v.getContext(), ClassAttendanceActivity.class);
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
     }
 

@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
+            "test:hello", "bar@example.com:world"
     };
 
     /**
@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
 
         // Set up the login form.
         mUserView = findViewById(R.id.username);
@@ -144,7 +144,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean isUserValid(String user) {
         //TODO: Replace this with your own logic
-        return user.contains("@");
+        return true;
     }
 
     private boolean isPasswordValid(String password) {

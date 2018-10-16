@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#283593</color>
     <color name="colorAccent">#7986CB</color>
     <color name="navHeader"></color>
+    <color name="iconColor">#FFFFFF</color>
 </resources>

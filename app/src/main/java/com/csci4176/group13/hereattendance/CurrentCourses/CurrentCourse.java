@@ -1,4 +1,4 @@
-package com.csci4176.group13.hereattendance.currentcourses;
+package com.csci4176.group13.hereattendance.CurrentCourses;
 
 /**
  * Data structure to hold course data

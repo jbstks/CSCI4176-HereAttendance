@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Here! Attendance</string>
     <string name="title_activity_login">Here!</string>
+    <string name="title_activity_main">Attendance History</string>
+    <string name="title_activity_qrscanner">QR Scanner</string>
     <!-- Strings related to login -->
     <string name="prompt_username">username</string>
     <string name="prompt_password">password</string>
@@ -11,11 +13,14 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
 
-    <string name="title_activity_main">Attendance History</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Attendance</string>
+    <string name="nav_header_student_name">John Appleseed</string>
     <string name="nav_header_desc">Navigation header</string>
+
     <string name="action_settings">Settings</string>
+    <!-- This will be overwritten by the course that was selected -->
+    <string name="title_activity_class_attendance">CSCI4176</string>
 </resources>
