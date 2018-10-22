@@ -1,7 +1,6 @@
-package com.csci4176.group13.hereattendance.Fragments;
+package com.csci4176.group13.hereattendance.Fragments.Student;
 
 import android.os.Bundle;
-//import android.app.Fragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,15 +16,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Fragment to hold list values of current courses
+ * Fragment to hold student's list values of current courses
  */
-public class CurrCoursesFragment extends Fragment {
+public class StudentAttendanceHistoryFragment extends Fragment {
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public CurrCoursesFragment() {
+    public StudentAttendanceHistoryFragment() {
     }
 
     @Override

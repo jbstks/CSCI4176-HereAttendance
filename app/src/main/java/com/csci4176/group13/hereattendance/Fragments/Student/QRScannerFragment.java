@@ -1,4 +1,4 @@
-package com.csci4176.group13.hereattendance.Fragments;
+package com.csci4176.group13.hereattendance.Fragments.Student;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

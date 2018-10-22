@@ -18,7 +18,7 @@ public class CurrentCourse {
      * Constructor to create a CurrentCourse object with the following data
      * @param c     the course code
      * @param n     the course name
-     * @param ap    the percentage of one's attendance in this course
+     * @param ap    the percentage of one's/classes attendance in this course (depends on student/prof)
      */
     public CurrentCourse(String c, String n, int ap) {
         code = c;

@@ -36,13 +36,15 @@ public class LoginActivity extends AppCompatActivity {
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "test:hello", "bar@example.com:world"
+            "student:student", "professor:professor"
     };
 
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
+    // Keep track of the login task to ensure we can cancel it if requested.
     private UserLoginTask mAuthTask = null;
+
+    // Variables to hold the login information
+    private String mUser = "";
+    private String mPassword = "";
 
     // UI references.
     private EditText mUserView;
@@ -194,9 +196,6 @@ public class LoginActivity extends AppCompatActivity {
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mUser;
-        private final String mPassword;
-
         UserLoginTask(String user, String password) {
             mUser = user;
             mPassword = password;
@@ -231,8 +230,10 @@ public class LoginActivity extends AppCompatActivity {
 
             if (success) {
                 finish();
+
                 // now that the user is logged in, switch to MainActivity
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("user", mUser);
                 startActivity(intent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
