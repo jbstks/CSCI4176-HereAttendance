@@ -16,13 +16,14 @@ import android.view.MenuItem;
 import com.csci4176.group13.hereattendance.Fragments.Professor.ProfAttendanceHistoryFragment;
 import com.csci4176.group13.hereattendance.Fragments.Student.StudentAttendanceHistoryFragment;
 import com.csci4176.group13.hereattendance.Fragments.Student.QRScannerFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private String user;
-    // this needs to be passed around activities and fragments
-    Bundle loginActivityBundle;
+    FirebaseUser signedInUser = FirebaseAuth.getInstance().getCurrentUser();
+    String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +32,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Intent loginActivityIntent = getIntent();
-        loginActivityBundle = loginActivityIntent.getExtras();
-
-        if (loginActivityBundle != null) {
-            user = (String) loginActivityBundle.get("user");
-        }
+        if (signedInUser != null)
+            user = signedInUser.getEmail();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -51,7 +48,7 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fm = getSupportFragmentManager();
 
         // show/hide content depending on user
-        if ( user.equals("professor") ) {
+        if ( user.equals("professor@here.com") ) {
             fm.beginTransaction().replace(R.id.content, new ProfAttendanceHistoryFragment()).commit();
             Menu navMenu = navigationView.getMenu();
             navMenu.findItem(R.id.nav_qrscanner).setVisible(false);
@@ -87,13 +84,21 @@ public class MainActivity extends AppCompatActivity
             getSupportActionBar().setTitle("QR Scanner");
         }
         else if (id == R.id.nav_logout) {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            // Attempt logout
+            try {
+                FirebaseAuth.getInstance().signOut();
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+            // If successful go back to LoginActivity
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             return true;
         }
 
         FragmentManager fm = getSupportFragmentManager();
-        currentPage.setArguments(loginActivityBundle);
         fm.beginTransaction().replace(R.id.content, currentPage).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

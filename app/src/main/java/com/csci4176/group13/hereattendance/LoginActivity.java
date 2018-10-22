@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.AsyncTask;
@@ -13,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,12 +24,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A login screen that offers login via username/password.
  *
  * This is the default LoginActivity built into Android Studio.
  * It has been modified to work with our application.
+ * The Firebase aspects of the code are from https://firebase.google.com/docs/auth/android/password-auth
  */
 public class LoginActivity extends AppCompatActivity {
 
@@ -36,15 +46,15 @@ public class LoginActivity extends AppCompatActivity {
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "student:student", "professor:professor"
+            "test:hello", "bar@example.com:world"
     };
 
-    // Keep track of the login task to ensure we can cancel it if requested.
+    /**
+     * Keep track of the login task to ensure we can cancel it if requested.
+     */
     private UserLoginTask mAuthTask = null;
 
-    // Variables to hold the login information
-    private String mUser = "";
-    private String mPassword = "";
+    private FirebaseAuth mAuth;
 
     // UI references.
     private EditText mUserView;
@@ -57,11 +67,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //getSupportActionBar().hide();
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
 
         // Set up the login form.
         mUserView = findViewById(R.id.username);
-
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -97,9 +107,9 @@ public class LoginActivity extends AppCompatActivity {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
+        /*if (mAuthTask != null) {
             return;
-        }
+        }*/
 
         // Reset errors.
         mUserView.setError(null);
@@ -138,9 +148,29 @@ public class LoginActivity extends AppCompatActivity {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(user, password);
-            mAuthTask.execute((Void) null);
+            //mAuthTask = new UserLoginTask(user, password);
+            //mAuthTask.execute((Void) null);
+            String userEmail = user+"@here.com";
+            mAuth.signInWithEmailAndPassword(userEmail, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d("LOGIN", "signInWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                updateUI(user);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                //Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                updateUI(null);
+                            }
 
+                            // ...
+                        }
+                    });
         }
     }
 
@@ -152,6 +182,25 @@ public class LoginActivity extends AppCompatActivity {
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;
+    }
+
+    /** updateUI
+     *
+     * Decides whether to switch intent to main activity
+     *
+     * @param user
+     *        the current session, or null if there is none
+     */
+    private void updateUI(FirebaseUser user) {
+        showProgress(false);
+        if (user == null) {
+            //setContentView(R.layout.activity_login);
+            /*mPasswordView.setError(getString(R.string.error_incorrect_password));
+            mPasswordView.requestFocus();*/
+        } else {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 
     /**
@@ -196,6 +245,9 @@ public class LoginActivity extends AppCompatActivity {
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
+        private final String mUser;
+        private final String mPassword;
+
         UserLoginTask(String user, String password) {
             mUser = user;
             mPassword = password;
@@ -212,13 +264,13 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
+            /*for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
                 if (pieces[0].equals(mUser)) {
                     // Account exists, return true if the password matches.
                     return pieces[1].equals(mPassword);
                 }
-            }
+            }*/
 
             return true;
         }
@@ -230,10 +282,8 @@ public class LoginActivity extends AppCompatActivity {
 
             if (success) {
                 finish();
-
                 // now that the user is logged in, switch to MainActivity
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("user", mUser);
                 startActivity(intent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
@@ -246,6 +296,14 @@ public class LoginActivity extends AppCompatActivity {
             mAuthTask = null;
             showProgress(false);
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
     }
 }
 
