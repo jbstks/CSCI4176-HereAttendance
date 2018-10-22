@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "122677830283",
+    "firebase_url": "https://csci4176-hereattendance.firebaseio.com",
+    "project_id": "csci4176-hereattendance",
+    "storage_bucket": "csci4176-hereattendance.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122677830283:android:72f8b8aba30e8992",
+        "android_client_info": {
+          "package_name": "com.csci4176.group13.hereattendance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122677830283-o66reluc2mh1ri0vq8rsn6qm35jdv85c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBT04cSfz_aHGaAYt3kt_l9k9xbu0CitaI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

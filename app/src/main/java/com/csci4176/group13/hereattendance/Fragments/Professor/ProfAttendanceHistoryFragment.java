@@ -26,7 +26,7 @@ public class ProfAttendanceHistoryFragment extends Fragment {
      */
     public ProfAttendanceHistoryFragment() {
     }
-
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
