@@ -3,6 +3,7 @@
     package="com.csci4176.group13.hereattendance">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -33,6 +34,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.csci4176.group13.hereattendance.MainActivity" />
         </activity>
+
+
+        <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES" android:value="Barcode"/>
     </application>
 
 </manifest>
