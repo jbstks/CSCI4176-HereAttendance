@@ -30,7 +30,7 @@ public class ProfAttendanceHistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_currcourses, container, false);
+        View view = inflater.inflate(R.layout.fragment_attendance_history, container, false);
 
 
         /* if ( getArguments().getString("user") != null )

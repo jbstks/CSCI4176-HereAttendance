@@ -5,4 +5,4 @@
     android:name="com.csci4176.group13.hereattendance.Fragments.Student.StudentAttendanceHistoryFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout="@layout/fragment_currcourses" />
+    tools:layout="@layout/fragment_attendance_history" />

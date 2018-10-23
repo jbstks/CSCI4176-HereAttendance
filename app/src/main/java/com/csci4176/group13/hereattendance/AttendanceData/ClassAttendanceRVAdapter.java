@@ -1,4 +1,4 @@
-package com.csci4176.group13.hereattendance.CurrentCourses;
+package com.csci4176.group13.hereattendance.AttendanceData;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.csci4176.group13.hereattendance.ClassAttendanceActivity;
+import com.csci4176.group13.hereattendance.CurrentCourses.CurrentCourse;
 import com.csci4176.group13.hereattendance.R;
 
 import java.util.List;
@@ -18,17 +19,17 @@ import java.util.List;
  *
  * @author Joanna Bistekos
  */
-public class CurrCoursesRVAdapter extends RecyclerView.Adapter<CurrCoursesRVAdapter.CurrCourseViewHolder> {
+public class ClassAttendanceRVAdapter extends RecyclerView.Adapter<ClassAttendanceRVAdapter.CurrCourseViewHolder> {
 
-    private final List<CurrentCourse> currentCourses;
+    private final List<AttendanceData> attendanceData;
 
     /**
      * Constructor to create a RecyclerView adapter
      *
-     * @param cc the current course list
+     * @param ad the attendance data list
      */
-    public CurrCoursesRVAdapter(List<CurrentCourse> cc) {
-        currentCourses = cc;
+    public ClassAttendanceRVAdapter(List<AttendanceData> ad) {
+        attendanceData = ad;
     }
 
     /**
@@ -37,9 +38,9 @@ public class CurrCoursesRVAdapter extends RecyclerView.Adapter<CurrCoursesRVAdap
     public static class CurrCourseViewHolder extends RecyclerView.ViewHolder {
 
         public final LinearLayout listItem;
-        public final TextView code;
-        public final TextView name;
-        public final TextView attendancePercentage;
+        public final TextView lectureNum;
+        public final TextView date;
+        public final TextView isAttended;
 
         CurrCourseViewHolder(View view) {
             super(view);
@@ -76,8 +77,8 @@ public class CurrCoursesRVAdapter extends RecyclerView.Adapter<CurrCoursesRVAdap
 
     @Override
     public void onBindViewHolder(final CurrCourseViewHolder holder, int position) {
-        holder.code.setText(currentCourses.get(position).getCode());
-        holder.name.setText(currentCourses.get(position).getName());
+        holder.lectureNum.setText("Lecture "+attendanceData.get(position).getLectureNum());
+        holder.date.setText(attendanceData.get(position).getDate());
         holder.attendancePercentage.setText(Integer.toString(currentCourses.get(position).getAttendancePercent()) + "%");
     }
 

@@ -8,7 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.csci4176.group13.hereattendance.AttendanceData.AttendanceData;
+import com.csci4176.group13.hereattendance.AttendanceData.ClassAttendanceRVAdapter;
 import com.csci4176.group13.hereattendance.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Fragment to hold student's list values of class attendance
@@ -25,24 +30,23 @@ public class StudentClassAttendanceFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_student_class_attendance, container, false);
+        View view = inflater.inflate(R.layout.fragment_class_attendance, container, false);
 
-        /*RecyclerView rv = view.findViewById(R.id.rv);
+        RecyclerView rv = view.findViewById(R.id.rv);
         rv.setHasFixedSize(false);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
 
-        List<CurrentCourse> currentCourses;
-        currentCourses = new ArrayList<>();
+        List<AttendanceData> studentAttendance;
+        studentAttendance = new ArrayList<>();
 
-        currentCourses.add(new CurrentCourse("CSCI3130", "Software Engineering", 60));
-        currentCourses.add(new CurrentCourse("CSCI3130", "Software Engineering", 60));
-        currentCourses.add(new CurrentCourse("CSCI4176", "Mobile Computing", 75));
-        currentCourses.add(new CurrentCourse("CSCI3110", "Algorithms", 98));
-
-        CurrCoursesRVAdapter adapter = new CurrCoursesRVAdapter(currentCourses);
-        rv.setAdapter(adapter);*/
+        studentAttendance.add(new AttendanceData(1, "September 4", true));
+        studentAttendance.add(new AttendanceData(2, "September 8", true));
+        studentAttendance.add(new AttendanceData(3, "September 12", true));
+        studentAttendance.add(new AttendanceData(4, "September 14", false));
+        ClassAttendanceRVAdapter adapter = new ClassAttendanceRVAdapter(studentAttendance);
+        rv.setAdapter(adapter);
 
         return view;
     }
