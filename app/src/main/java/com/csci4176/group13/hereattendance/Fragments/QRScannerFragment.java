@@ -1,5 +1,6 @@
 package com.csci4176.group13.hereattendance.Fragments;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
@@ -9,12 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.csci4176.group13.hereattendance.Manifest;
 import com.csci4176.group13.hereattendance.R;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import org.w3c.dom.Text;
+
+import java.io.IOException;
 
 /**
  * Fragment for the QR camera scanner
@@ -51,7 +55,17 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
         qrCodeView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-
+                if(ActivityCompat.checkSelfPermission(getContext(),
+                        android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
+                    ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{android.Manifest.permission.CAMERA}, cameraPermission);
+                    return;
+                }
+                try {
+                    camera.start(qrCodeView.getHolder());
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
             }
 
             @Override
