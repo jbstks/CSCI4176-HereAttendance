@@ -3,30 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
-    tools:context=".Fragments.Student.QRScannerFragment">
-=======
-    tools:context=".Fragments.QRScannerFragment"
+    tools:context=".Fragments.Student.QRScannerFragment"
     android:orientation="vertical">
->>>>>>> QR_Scanner
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
-        android:id="@+id/txt"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Please point at the QR code"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:background="#7F7F7F"/>
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <SurfaceView
-        android:id="@+id/QRView"
+        <TextView
+            android:id="@+id/txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#7F7F7F"
+            android:gravity="center"
+            android:text="Please point at the QR code"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center" />
+        android:layout_height="0dp"
+        android:layout_weight="10">
+
+        <SurfaceView
+            android:id="@+id/QRView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
+    </LinearLayout>
 
 
 </LinearLayout>
