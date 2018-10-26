@@ -40,15 +40,15 @@ public class ClassAttendanceRVAdapter extends RecyclerView.Adapter<ClassAttendan
         public final LinearLayout listItem;
         public final TextView lectureNum;
         public final TextView date;
-        public final TextView isAttended;
+        //public final TextView isAttended;
 
         CurrCourseViewHolder(View view) {
             super(view);
 
             listItem = view.findViewById(R.id.listItem);
-            code = (TextView) view.findViewById(R.id.code);
-            name = (TextView) view.findViewById(R.id.name);
-            attendancePercentage = (TextView) view.findViewById(R.id.attendancePercent);
+            lectureNum = (TextView) view.findViewById(R.id.lectureNum);
+            date = (TextView) view.findViewById(R.id.date);
+            //isAttended = (TextView) view.findViewById(R.id.attendancePercent);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -79,11 +79,11 @@ public class ClassAttendanceRVAdapter extends RecyclerView.Adapter<ClassAttendan
     public void onBindViewHolder(final CurrCourseViewHolder holder, int position) {
         holder.lectureNum.setText("Lecture "+attendanceData.get(position).getLectureNum());
         holder.date.setText(attendanceData.get(position).getDate());
-        holder.attendancePercentage.setText(Integer.toString(currentCourses.get(position).getAttendancePercent()) + "%");
+        //holder.attendancePercentage.setText(Integer.toString(currentCourses.get(position).getAttendancePercent()) + "%");
     }
 
     @Override
     public int getItemCount() {
-        return currentCourses.size();
+        return attendanceData.size();
     }
 }
