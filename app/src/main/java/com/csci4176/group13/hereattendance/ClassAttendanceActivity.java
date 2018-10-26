@@ -13,7 +13,7 @@ public class ClassAttendanceActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_dialog_close_dark);
+        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_dialog_close_dark);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

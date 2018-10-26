@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "122677830283-i979aiqk54frch4effs31u773aenu405.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.csci4176.group13.hereattendance",
+            "certificate_hash": "344a2170bc8044a7783627577d7cf7073a98df1b"
+          }
+        },
+        {
           "client_id": "122677830283-o66reluc2mh1ri0vq8rsn6qm35jdv85c.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "122677830283-o66reluc2mh1ri0vq8rsn6qm35jdv85c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

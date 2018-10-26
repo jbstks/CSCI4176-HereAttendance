@@ -59,6 +59,7 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                     ActivityCompat.requestPermissions(getActivity(),
                             new String[]{android.Manifest.permission.CAMERA}, cameraPermission);
                     return;
+                    
                 }
                 try {
                     camera.start(qrCodeView.getHolder());
