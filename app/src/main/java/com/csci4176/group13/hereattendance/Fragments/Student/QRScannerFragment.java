@@ -1,17 +1,23 @@
 package com.csci4176.group13.hereattendance.Fragments.Student;
 
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.csci4176.group13.hereattendance.R;
 import com.google.android.gms.vision.CameraSource;
+import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
@@ -48,8 +54,7 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
         qrResult = view.findViewById(R.id.txt);
         qrDetect = new BarcodeDetector.Builder(view.getContext())
                 .setBarcodeFormats(Barcode.QR_CODE).build();
-        camera = new CameraSource.Builder(view.getContext(), qrDetect)
-                .setRequestedPreviewSize(640, 640).build();
+        camera = new CameraSource.Builder(view.getContext(), qrDetect).build();
 
         qrCodeView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -75,7 +80,33 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
+                camera.stop();
+            }
+        });
 
+        qrDetect.setProcessor(new Detector.Processor<Barcode>() {
+            @Override
+            public void release() {
+
+            }
+
+            @Override
+            public void receiveDetections(Detector.Detections<Barcode> detections) {
+                final SparseArray<Barcode> codes = detections.getDetectedItems();
+
+                if(codes.size() != 0){
+                    qrResult.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Vibrator vibrate = (Vibrator)getActivity().getApplicationContext()
+                                    .getSystemService(Context.VIBRATOR_SERVICE);
+                            vibrate.vibrate(100);
+                            Toast.makeText(getContext(),codes.valueAt(0).displayValue,
+                                    Toast.LENGTH_SHORT).show();
+                            release();
+                        }
+                    });
+                }
             }
         });
 
