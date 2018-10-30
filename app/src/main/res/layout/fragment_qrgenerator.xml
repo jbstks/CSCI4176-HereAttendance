@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.Student.QRScannerFragment"
+    android:orientation="vertical">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/edtQRCSCIText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:hint="@string/msgCSCI_QRGenerator" />
+
+        <EditText
+            android:id="@+id/edtQRDateText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtQRCSCIText"
+            android:hint="@string/msgDate_QRGenerator" />
+
+        <Button
+            android:id="@+id/btnQRGenerate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtQRDateText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="Generate" />
+
+        <ImageView
+            android:id="@+id/imgQRCode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/btnQRGenerate" />
+    </RelativeLayout>
+</LinearLayout>

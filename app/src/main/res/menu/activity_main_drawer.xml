@@ -14,6 +14,10 @@
             android:id="@+id/nav_qrscanner"
             android:icon="@drawable/ic_round_crop_free_24px"
             android:title="QR Scanner" />
+        <item
+            android:id="@+id/nav_qrgenerator"
+            android:icon="@drawable/ic_round_crop_free_24px"
+            android:title="QR Generator" />
     </group>
     <group android:id="@+id/g2">
         <item
