@@ -1,10 +1,15 @@
 package com.csci4176.group13.hereattendance.Fragments.Student;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
@@ -49,7 +54,7 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
 
 
-        View view = inflater.inflate(R.layout.fragment_qrscanner, container, false);
+        final View view = inflater.inflate(R.layout.fragment_qrscanner, container, false);
         qrCodeView = view.findViewById(R.id.QRView);
         qrResult = view.findViewById(R.id.txt);
         qrDetect = new BarcodeDetector.Builder(view.getContext())
@@ -87,7 +92,7 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
         qrDetect.setProcessor(new Detector.Processor<Barcode>() {
             @Override
             public void release() {
-
+                camera.stop();
             }
 
             @Override
@@ -101,8 +106,7 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                             Vibrator vibrate = (Vibrator)getActivity().getApplicationContext()
                                     .getSystemService(Context.VIBRATOR_SERVICE);
                             vibrate.vibrate(100);
-                            Toast.makeText(getContext(),codes.valueAt(0).displayValue,
-                                    Toast.LENGTH_SHORT).show();
+                            showAlertDialogButtonClicked(codes.valueAt(0).displayValue);
                             release();
                         }
                     });
@@ -112,4 +116,20 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
 
         return view;
     }
+
+        public void showAlertDialogButtonClicked(String course) {
+
+            // setup the alert builder
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("ALERT");
+            builder.setMessage("Attendance for " +course+" has been registered");
+
+            // add a button
+            builder.setPositiveButton("OK", null);
+
+            // create and show the alert dialog
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            
+        }
 }
