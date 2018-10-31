@@ -19,11 +19,10 @@
     <string name="nav_header_title">Attendance</string>
     <string name="nav_header_student_name">John Appleseed</string>
     <string name="nav_header_desc">Navigation header</string>
+    <string name="msgCSCI_QRGenerator">Please write CSCI Code</string>
+    <string name="msgDate_QRGenerator">Please write Date of Lecture</string>
 
     <string name="action_settings">Settings</string>
     <!-- This will be overwritten by the course that was selected -->
     <string name="title_activity_class_attendance">CSCI4176</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
