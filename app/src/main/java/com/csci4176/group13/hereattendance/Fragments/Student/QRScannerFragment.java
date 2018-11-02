@@ -3,11 +3,13 @@ package com.csci4176.group13.hereattendance.Fragments.Student;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.SparseArray;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.csci4176.group13.hereattendance.MainActivity;
 import com.csci4176.group13.hereattendance.R;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
@@ -69,7 +72,6 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                     ActivityCompat.requestPermissions(getActivity(),
                             new String[]{android.Manifest.permission.CAMERA}, cameraPermission);
                     return;
-                    
                 }
                 try {
                     camera.start(qrCodeView.getHolder());
@@ -124,12 +126,25 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
             builder.setTitle("ALERT");
             builder.setMessage("Attendance for " +course+" has been registered");
 
-            // add a button
-            builder.setPositiveButton("OK", null);
 
-            // create and show the alert dialog
+            DialogInterface.OnClickListener dialogButtonClick =
+                    new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch(which){
+                        case DialogInterface.BUTTON_POSITIVE:
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                            break;
+                    }
+                }
+            };
+
+            // add a button
+            builder.setPositiveButton("OK", dialogButtonClick);
+            // create the alert dialog
             AlertDialog dialog = builder.create();
+            //show the alert dialog
             dialog.show();
-            
         }
 }
