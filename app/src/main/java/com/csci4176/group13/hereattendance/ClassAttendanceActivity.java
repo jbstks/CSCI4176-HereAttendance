@@ -1,8 +1,11 @@
 package com.csci4176.group13.hereattendance;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import com.csci4176.group13.hereattendance.Fragments.Student.StudentClassAttendanceFragment;
 
 public class ClassAttendanceActivity extends AppCompatActivity {
 
@@ -15,6 +18,9 @@ public class ClassAttendanceActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_dialog_close_dark);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction().replace(R.id.content, new StudentClassAttendanceFragment()).commit();
     }
 
 }
