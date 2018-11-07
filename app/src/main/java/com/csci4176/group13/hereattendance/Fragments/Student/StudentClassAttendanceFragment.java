@@ -22,6 +22,7 @@ import java.util.List;
 public class StudentClassAttendanceFragment extends Fragment {
 
     TextView overallAttendancePercent;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -33,6 +34,9 @@ public class StudentClassAttendanceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_class_attendance, container, false);
+
+        if (getActivity().getIntent().getExtras() != null)
+            getActivity().setTitle(getActivity().getIntent().getStringExtra("courseCode"));
 
         RecyclerView rv = view.findViewById(R.id.rv);
         rv.setHasFixedSize(false);
