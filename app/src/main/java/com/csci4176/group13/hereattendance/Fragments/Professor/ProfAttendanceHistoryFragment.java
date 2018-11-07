@@ -32,10 +32,6 @@ public class ProfAttendanceHistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_attendance_history, container, false);
 
-
-        /* if ( getArguments().getString("user") != null )
-            String user = this.getArguments().getString("user"); */
-
         RecyclerView rv = view.findViewById(R.id.rv);
         rv.setHasFixedSize(false);
 

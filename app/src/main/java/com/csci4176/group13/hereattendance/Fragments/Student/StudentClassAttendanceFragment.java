@@ -7,8 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.csci4176.group13.hereattendance.AttendanceData.AttendanceData;
+import com.csci4176.group13.hereattendance.AttendanceData.LectureAttendance;
 import com.csci4176.group13.hereattendance.AttendanceData.ClassAttendanceRVAdapter;
 import com.csci4176.group13.hereattendance.R;
 
@@ -20,6 +21,7 @@ import java.util.List;
  */
 public class StudentClassAttendanceFragment extends Fragment {
 
+    TextView overallAttendancePercent;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -38,15 +40,18 @@ public class StudentClassAttendanceFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
 
-        List<AttendanceData> studentAttendance;
+        List<LectureAttendance> studentAttendance;
         studentAttendance = new ArrayList<>();
 
-        studentAttendance.add(new AttendanceData(1, "September 4", true));
-        studentAttendance.add(new AttendanceData(2, "September 8", true));
-        studentAttendance.add(new AttendanceData(3, "September 12", true));
-        studentAttendance.add(new AttendanceData(4, "September 14", false));
+        studentAttendance.add(new LectureAttendance(1, "September 4", true));
+        studentAttendance.add(new LectureAttendance(2, "September 8", true));
+        studentAttendance.add(new LectureAttendance(3, "September 12", true));
+        studentAttendance.add(new LectureAttendance(4, "September 14", false));
         ClassAttendanceRVAdapter adapter = new ClassAttendanceRVAdapter(studentAttendance);
         rv.setAdapter(adapter);
+
+        /*overallAttendancePercent = view.findViewById(R.id.overallAttendancePercent);
+        overallAttendancePercent.setText();*/
 
         return view;
     }

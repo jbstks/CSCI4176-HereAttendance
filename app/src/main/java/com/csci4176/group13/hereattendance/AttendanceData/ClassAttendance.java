@@ -1,12 +1,12 @@
 package com.csci4176.group13.hereattendance.AttendanceData;
 
-public class AttendanceData {
+public class ClassAttendance {
 
     private int lectureNum;
     private String date;
     private boolean attended;
 
-    public AttendanceData(int l, String d, boolean a) {
+    public ClassAttendance(int l, String d, boolean a) {
         lectureNum = l;
         date = d;
         attended = a;
