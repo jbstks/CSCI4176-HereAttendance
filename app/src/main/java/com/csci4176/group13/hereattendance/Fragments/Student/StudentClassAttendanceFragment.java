@@ -1,27 +1,42 @@
 package com.csci4176.group13.hereattendance.Fragments.Student;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.csci4176.group13.hereattendance.AttendanceData.LectureAttendance;
 import com.csci4176.group13.hereattendance.AttendanceData.ClassAttendanceRVAdapter;
+//import com.csci4176.group13.hereattendance.DatabaseSingleton;
+import com.csci4176.group13.hereattendance.LoginActivity;
 import com.csci4176.group13.hereattendance.R;
-
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Fragment to hold student's list values of class attendance
  */
-public class StudentClassAttendanceFragment extends Fragment {
 
-    TextView overallAttendancePercent;
+// TODO figure out why it's not grabbing the right node when it's getting the child
+public class StudentClassAttendanceFragment extends Fragment {
+    List<LectureAttendance> studentAttendance = new ArrayList<>();
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+
+    DatabaseReference myRef= database.getReference();
+    ClassAttendanceRVAdapter adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -29,33 +44,42 @@ public class StudentClassAttendanceFragment extends Fragment {
      */
     public StudentClassAttendanceFragment() {
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        adapter = new ClassAttendanceRVAdapter(studentAttendance);
+
         View view = inflater.inflate(R.layout.fragment_class_attendance, container, false);
 
         if (getActivity().getIntent().getExtras() != null)
             getActivity().setTitle(getActivity().getIntent().getStringExtra("courseCode"));
-
         RecyclerView rv = view.findViewById(R.id.rv);
         rv.setHasFixedSize(false);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
-
-        List<LectureAttendance> studentAttendance;
-        studentAttendance = new ArrayList<>();
-
-        studentAttendance.add(new LectureAttendance(1, "September 4", true));
-        studentAttendance.add(new LectureAttendance(2, "September 8", true));
-        studentAttendance.add(new LectureAttendance(3, "September 12", true));
-        studentAttendance.add(new LectureAttendance(4, "September 14", false));
-        ClassAttendanceRVAdapter adapter = new ClassAttendanceRVAdapter(studentAttendance);
         rv.setAdapter(adapter);
 
-        /*overallAttendancePercent = view.findViewById(R.id.overallAttendancePercent);
-        overallAttendancePercent.setText();*/
+        Log.d("courseCode",getActivity().getIntent().getStringExtra("courseCode"));
+        myRef=myRef.child(getActivity().getIntent().getStringExtra("courseCode"));
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String lectureNum = snapshot.getKey();
+                    String lectureDate = snapshot.child("date").getValue().toString();
+                    Boolean attend = snapshot.hasChild("student");
+                    studentAttendance.add(new LectureAttendance(Integer.parseInt(lectureNum), lectureDate, attend));
+                    adapter.notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(),"Unable to pull from the database. Please check network connection", Toast.LENGTH_LONG).show();
+            }
+        });
+        adapter.notifyDataSetChanged();
 
         return view;
     }
