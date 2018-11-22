@@ -92,6 +92,10 @@ public class MainActivity extends AppCompatActivity
             currentPage = new QRGeneratorFragment();
             getSupportActionBar().setTitle("QR Generator");
         }
+        else if (id == R.id.nav_map) {
+            currentPage = new MapFragment();
+            getSupportActionBar().setTitle("Map");
+        }
         else if (id == R.id.nav_logout) {
             // Attempt logout
             try {
