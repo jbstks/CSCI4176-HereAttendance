@@ -13,7 +13,6 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
 
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Attendance</string>
@@ -25,4 +24,6 @@
     <string name="action_settings">Settings</string>
     <!-- This will be overwritten by the course that was selected -->
     <string name="title_activity_class_attendance">CSCI4176</string>
+    <!-- This will be overwritten as well -->
+    <string name="title_activity_qrgenerator">CSCI4176</string>
 </resources>

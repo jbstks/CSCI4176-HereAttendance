@@ -8,7 +8,6 @@
     android:paddingStart="16dp"
     android:paddingTop="10dp"
     android:paddingEnd="16dp"
-    android:paddingBottom="10dp"
     tools:context=".Fragments.Student.StudentAttendanceHistoryFragment">
 
     <LinearLayout
@@ -37,7 +36,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/attendancePercent"
+        android:id="@+id/overallAttendancePercent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -48,13 +47,14 @@
         android:visibility="gone" />
 
     <android.support.v7.widget.CardView
+        android:id="@+id/qrGenBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/colorPrimary"
-        app:cardCornerRadius="7dp">
+        android:layout_marginBottom="3dp"
+        android:backgroundTint="@color/colorPrimary"
+        app:cardCornerRadius="3dp">
 
         <TextView
-            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_round_crop_free_24px"

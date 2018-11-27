@@ -49,10 +49,11 @@ public class CurrCoursesRVAdapter extends RecyclerView.Adapter<CurrCoursesRVAdap
             name = (TextView) view.findViewById(R.id.name);
             attendancePercentage = (TextView) view.findViewById(R.id.attendancePercent);
 
+            // Open the lecture attendance activity on click
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int position = getAdapterPosition();
+                    //int position = getAdapterPosition();
                     Intent intent = new Intent(v.getContext(), ClassAttendanceActivity.class);
                     intent.putExtra("courseCode", code.getText());
                     v.getContext().startActivity(intent);
@@ -61,13 +62,6 @@ public class CurrCoursesRVAdapter extends RecyclerView.Adapter<CurrCoursesRVAdap
         }
     }
 
-    /**
-     * Constructor
-     *
-     * @param parent
-     * @param viewType
-     * @return
-     */
     @Override
     public CurrCourseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())

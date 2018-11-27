@@ -34,7 +34,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.csci4176.group13.hereattendance.MainActivity" />
         </activity>
-
+        <activity
+            android:name=".QRGeneratorActivity"
+            android:label="@string/title_activity_qrgenerator"
+            android:parentActivityName=".ClassAttendanceActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.csci4176.group13.hereattendance.ClassAttendanceActivity" />
+        </activity>
 
         <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES" android:value="Barcode"/>
     </application>
