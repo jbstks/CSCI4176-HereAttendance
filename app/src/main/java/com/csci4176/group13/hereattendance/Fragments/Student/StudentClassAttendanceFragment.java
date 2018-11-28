@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.csci4176.group13.hereattendance.AttendanceData.LectureAttendance;
 import com.csci4176.group13.hereattendance.AttendanceData.ClassAttendanceRVAdapter;
 //import com.csci4176.group13.hereattendance.DatabaseSingleton;
-import com.csci4176.group13.hereattendance.DatabaseSingleton;
 import com.csci4176.group13.hereattendance.LoginActivity;
 import com.csci4176.group13.hereattendance.R;
 import com.google.firebase.database.DataSnapshot;
@@ -33,7 +32,10 @@ import java.util.List;
 // TODO figure out why it's not grabbing the right node when it's getting the child
 public class StudentClassAttendanceFragment extends Fragment {
     List<LectureAttendance> studentAttendance = new ArrayList<>();
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
 
+
+    DatabaseReference myRef= database.getReference();
     ClassAttendanceRVAdapter adapter;
 
     /**
@@ -57,9 +59,26 @@ public class StudentClassAttendanceFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
         rv.setAdapter(adapter);
-        studentAttendance = DatabaseSingleton.getStudentLectureAttendance(getActivity().getIntent().getStringExtra("courseCode"));
-        Log.d("courseCode",getActivity().getIntent().getStringExtra("courseCode"));
 
+        Log.d("courseCode",getActivity().getIntent().getStringExtra("courseCode"));
+        myRef=myRef.child(getActivity().getIntent().getStringExtra("courseCode"));
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String lectureNum = snapshot.getKey();
+                    String lectureDate = snapshot.child("date").getValue().toString();
+                    Boolean attend = snapshot.hasChild("student");
+                    studentAttendance.add(new LectureAttendance(Integer.parseInt(lectureNum), lectureDate, attend));
+                    adapter.notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(),"Unable to pull from the database. Please check network connection", Toast.LENGTH_LONG).show();
+            }
+        });
         adapter.notifyDataSetChanged();
 
         return view;
