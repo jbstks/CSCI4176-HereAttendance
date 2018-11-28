@@ -79,8 +79,9 @@ public class CurrCoursesRVAdapter extends RecyclerView.Adapter<CurrCoursesRVAdap
     public void onBindViewHolder(final CurrCourseViewHolder holder, int position) {
         holder.code.setText(currentCourses.get(position).getCode());
         holder.name.setText(currentCourses.get(position).getName());
-        // TODO this will need a firebase pull
-        holder.attendancePercentage.setText(Integer.toString(currentCourses.get(position).getAttendancePercent()) + "%");
+        String percentage="";
+        percentage = currentCourses.get(position).getAttendancePercent()== -1? "-": ""+currentCourses.get(position).getAttendancePercent();
+        holder.attendancePercentage.setText(percentage + "%");
     }
 
     @Override

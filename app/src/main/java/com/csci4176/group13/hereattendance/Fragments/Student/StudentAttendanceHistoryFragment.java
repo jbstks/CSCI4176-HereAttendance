@@ -35,11 +35,8 @@ public class StudentAttendanceHistoryFragment extends Fragment {
      * fragment (e.g. upon screen orientation changes).
      */
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-
-
     DatabaseReference myRef = database.getReference();
     CurrCoursesRVAdapter adapter;
-    int[] gradesarray = {0, 0, 0, 0};
 
     public StudentAttendanceHistoryFragment() {
     }
@@ -57,32 +54,29 @@ public class StudentAttendanceHistoryFragment extends Fragment {
         final List<CurrentCourse> currentCourses;
         currentCourses = new ArrayList<>();
 
-        currentCourses.add(new CurrentCourse("CSCI3130", "Software Engineering", gradesarray[0]));
-        currentCourses.add(new CurrentCourse("CSCI3110", "Algorithms", gradesarray[2]));
-        currentCourses.add(new CurrentCourse("CSCI3130", "Software Engineering", gradesarray[0]));
-        currentCourses.add(new CurrentCourse("CSCI4176", "Mobile Computing", gradesarray[1]));
+        currentCourses.add(new CurrentCourse("CSCI3130", "Software Engineering", -1));
+        currentCourses.add(new CurrentCourse("CSCI3110", "Algorithms", -1));
+        currentCourses.add(new CurrentCourse("CSCI3130", "Software Engineering", -1));
+        currentCourses.add(new CurrentCourse("CSCI4176", "Mobile Computing", -1));
 
 
         adapter = new CurrCoursesRVAdapter(currentCourses);
         rv.setAdapter(adapter);
-        // myRef=myRef.child(getActivity().getIntent().getStringExtra("courseCode"));
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-int lectnum = 0;
+                int lectnum = 0;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     int there = 0;
                     int dayspast = 0;
-lectnum++;
+                    lectnum++;
                     for (DataSnapshot courseLecture : snapshot.getChildren()) {
                         dayspast++;
                         if (courseLecture.hasChild("student")) {
                             there++;
                         }
-
-
                     }
-                    Log.d("courseCode","ppp"+(there * 100 / dayspast));
+                    Log.d("courseCode", "percentage Attendance" + (there * 100 / dayspast));
                     currentCourses.get(lectnum).setAttendancePercent(there * 100 / dayspast);
                     adapter.notifyDataSetChanged();
                 }
