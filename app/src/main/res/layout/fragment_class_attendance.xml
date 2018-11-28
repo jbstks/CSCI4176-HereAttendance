@@ -58,7 +58,7 @@
                         android:id="@+id/overallAttendancePercent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="75%"
+                        android:text="-%"
                         android:textAppearance="@android:style/TextAppearance.Material.Headline"
                         android:textSize="30sp" />
                 </LinearLayout>
@@ -90,7 +90,7 @@
                         android:id="@+id/daysAttendedNum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="3 of 4"
+                        android:text="- of -"
                         android:textAppearance="@android:style/TextAppearance.Material.Headline"
                         android:textSize="30sp" />
                 </LinearLayout>

@@ -32,7 +32,9 @@ public class ClassAttendanceActivity extends AppCompatActivity {
         // Setting the action bar functionality
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_round_close_24px);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FragmentManager fm = getSupportFragmentManager();
