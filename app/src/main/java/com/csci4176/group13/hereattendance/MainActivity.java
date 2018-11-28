@@ -68,12 +68,12 @@ public class MainActivity extends AppCompatActivity
             Menu navMenu = navigationView.getMenu();
             navMenu.findItem(R.id.nav_qrscanner).setVisible(false);
             navMenu.findItem(R.id.nav_map).setVisible(false);
-            navMenu.findItem(R.id.nav_qrgenerator).setVisible(true);
+            //navMenu.findItem(R.id.nav_qrgenerator).setVisible(true);
         } else {
             fm.beginTransaction().replace(R.id.content, new StudentAttendanceHistoryFragment()).commit();
             Menu navMenu = navigationView.getMenu();
             navMenu.findItem(R.id.nav_qrscanner).setVisible(true);
-            navMenu.findItem(R.id.nav_qrgenerator).setVisible(false);
+            //navMenu.findItem(R.id.nav_qrgenerator).setVisible(false);
         }
     }
 
@@ -114,10 +114,11 @@ public class MainActivity extends AppCompatActivity
             currentPage = new QRScannerFragment();
             getSupportActionBar().setTitle("QR Scanner");
         }
-        else if (id == R.id.nav_qrgenerator) {
+        // TODO: Remove this
+        /*else if (id == R.id.nav_qrgenerator) {
             currentPage = new QRGeneratorFragment();
             getSupportActionBar().setTitle("QR Generator");
-        }
+        }*/
         else if (id == R.id.nav_map) {
             currentPage = new Maps();
             getSupportActionBar().setTitle("Map");

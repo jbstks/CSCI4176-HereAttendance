@@ -34,4 +34,12 @@
     <string name="title_activity_class_attendance">CSCI4176</string>
     <!-- This will be overwritten as well -->
     <string name="title_activity_qrgenerator">CSCI4176</string>
+    <string name="nav_attendancehistory">Attendance History</string>
+    <string name="nav_qrscanner">QR Scanner</string>
+    <string name="nav_map">Map</string>
+    <string name="nav_logout">Logout</string>
+    <string name="nav_qrgenerator">QR Generator</string>
+    <string name="lecture_date">September 3</string>
+    <string name="attendance_percent">70%</string>
+    <string name="lecture_num">Lecture 1</string>
 </resources>

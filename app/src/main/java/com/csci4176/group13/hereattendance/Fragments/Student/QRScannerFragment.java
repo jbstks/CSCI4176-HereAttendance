@@ -1,6 +1,5 @@
 package com.csci4176.group13.hereattendance.Fragments.Student;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,10 +7,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
@@ -19,8 +15,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.csci4176.group13.hereattendance.MainActivity;
 import com.csci4176.group13.hereattendance.R;
@@ -28,8 +22,6 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -59,7 +51,7 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_qrscanner, container, false);
         qrCodeView = view.findViewById(R.id.QRView);
-        qrResult = view.findViewById(R.id.txt);
+        //qrResult = view.findViewById(R.id.txt);
         qrDetect = new BarcodeDetector.Builder(view.getContext())
                 .setBarcodeFormats(Barcode.QR_CODE).build();
         camera = new CameraSource.Builder(view.getContext(), qrDetect).build();

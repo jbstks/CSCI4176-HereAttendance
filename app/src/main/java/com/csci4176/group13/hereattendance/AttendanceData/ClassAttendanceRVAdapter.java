@@ -50,11 +50,10 @@ public class ClassAttendanceRVAdapter extends RecyclerView.Adapter<ClassAttendan
     }
 
     /**
-     * Constructor
+     * Creates the list items
      *
      * @param parent
      * @param viewType
-     * @return
      */
     @Override
     public CurrCourseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -70,7 +69,7 @@ public class ClassAttendanceRVAdapter extends RecyclerView.Adapter<ClassAttendan
         if (lectureAttendanceData.get(position).isAttended())
             holder.isAttended.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_done_24px, 0, 0, 0);
         else
-            holder.isAttended.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_close_24px, 0, 0, 0);
+            holder.isAttended.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_close_black_24px, 0, 0, 0);
     }
 
     @Override

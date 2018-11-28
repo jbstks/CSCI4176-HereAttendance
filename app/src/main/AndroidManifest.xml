@@ -45,10 +45,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".ClassAttendanceActivity"
             android:label="@string/title_activity_class_attendance"
@@ -57,6 +59,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.csci4176.group13.hereattendance.MainActivity" />
         </activity>
+
         <activity
             android:name=".QRGeneratorActivity"
             android:label="@string/title_activity_qrgenerator"
