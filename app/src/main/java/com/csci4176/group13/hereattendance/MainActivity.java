@@ -15,27 +15,41 @@ import android.view.MenuItem;
 
 import com.csci4176.group13.hereattendance.Fragments.Professor.ProfAttendanceHistoryFragment;
 import com.csci4176.group13.hereattendance.Fragments.Professor.QRGeneratorFragment;
+import com.csci4176.group13.hereattendance.Fragments.Student.Maps;
 import com.csci4176.group13.hereattendance.Fragments.Student.StudentAttendanceHistoryFragment;
 import com.csci4176.group13.hereattendance.Fragments.Student.QRScannerFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/** MainActivity
+ *
+ * The main activity for the app
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     FirebaseUser signedInUser = FirebaseAuth.getInstance().getCurrentUser();
     String user;
 
+    /**
+     * Things to be done on activity creation
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Setting up toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Checking if user is signed in
         if (signedInUser != null)
             user = signedInUser.getEmail();
 
+        // Setting up navigation menu
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -53,6 +67,7 @@ public class MainActivity extends AppCompatActivity
             fm.beginTransaction().replace(R.id.content, new ProfAttendanceHistoryFragment()).commit();
             Menu navMenu = navigationView.getMenu();
             navMenu.findItem(R.id.nav_qrscanner).setVisible(false);
+            navMenu.findItem(R.id.nav_map).setVisible(false);
             navMenu.findItem(R.id.nav_qrgenerator).setVisible(true);
         } else {
             fm.beginTransaction().replace(R.id.content, new StudentAttendanceHistoryFragment()).commit();
@@ -62,6 +77,10 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * If the back button (virtual or physical) is pressed while the navigation menu is open,
+     * it will hide the navigation menu
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -72,6 +91,13 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Depending on the navigation menu item selected, the screen (fragment) will change
+     *
+     * @param item the MenuItem that was selected
+     * @return true if everything went to plan
+     *         false if something went wrong
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -92,6 +118,10 @@ public class MainActivity extends AppCompatActivity
             currentPage = new QRGeneratorFragment();
             getSupportActionBar().setTitle("QR Generator");
         }
+        else if (id == R.id.nav_map) {
+            currentPage = new Maps();
+            getSupportActionBar().setTitle("Map");
+        }
         else if (id == R.id.nav_logout) {
             // Attempt logout
             try {
@@ -106,7 +136,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
             return true;
         }
-
+        // Load up the selected fragment
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.content, currentPage).commit();
 

@@ -5,11 +5,20 @@ public class LectureAttendance {
     private int lectureNum;
     private String date;
     private boolean attended;
+    private int attendancePercentage;
 
+    // Student
     public LectureAttendance(int l, String d, boolean a) {
         lectureNum = l;
         date = d;
         attended = a;
+    }
+
+    // Professor
+    public LectureAttendance(int l, String d, int ap) {
+        lectureNum = l;
+        date = d;
+        attendancePercentage = ap;
     }
 
     /* Get and set methods */
@@ -34,4 +43,7 @@ public class LectureAttendance {
     public void setAttended(boolean attended) {
         this.attended = attended;
     }
+
+    public int getAttendancePercentage() { return attendancePercentage; }
+    public void setAttendancePercentage(int attendancePercentage) {this.attendancePercentage = attendancePercentage; }
 }
