@@ -42,4 +42,5 @@
     <string name="lecture_date">September 3</string>
     <string name="attendance_percent">70%</string>
     <string name="lecture_num">Lecture 1</string>
+    <string name="overlay">overlay</string>
 </resources>

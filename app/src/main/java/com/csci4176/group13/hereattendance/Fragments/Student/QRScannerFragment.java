@@ -1,5 +1,6 @@
 package com.csci4176.group13.hereattendance.Fragments.Student;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,7 +8,10 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
@@ -15,6 +19,8 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.csci4176.group13.hereattendance.MainActivity;
 import com.csci4176.group13.hereattendance.R;
@@ -22,6 +28,8 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -37,7 +45,7 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
 
     CameraSource camera;
     SurfaceView qrCodeView;
-    TextView qrResult;
+    //TextView qrResult;
     BarcodeDetector qrDetect;
     int cameraPermission = 007;
 
@@ -47,6 +55,7 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
 
         final View view = inflater.inflate(R.layout.fragment_qrscanner, container, false);
         qrCodeView = view.findViewById(R.id.QRView);
@@ -93,7 +102,7 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                 final SparseArray<Barcode> codes = detections.getDetectedItems();
 
                 if(codes.size() != 0){
-                    qrResult.post(new Runnable() {
+                    qrCodeView.post(new Runnable() {
                         @Override
                         public void run() {
                             Vibrator vibrate = (Vibrator)getActivity().getApplicationContext()

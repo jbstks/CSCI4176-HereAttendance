@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.Student.QRScannerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <SurfaceView
         android:id="@+id/QRView"
         android:layout_width="match_parent"
@@ -15,10 +13,12 @@
         android:layout_gravity="center" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_round_crop_free_24px" />
-
+        android:contentDescription="@string/overlay"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:src="@drawable/ic_qrscan_overlay" />
 
 </FrameLayout>
