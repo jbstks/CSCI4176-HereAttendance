@@ -3,6 +3,7 @@
     <string name="title_activity_login">Here!</string>
     <string name="title_activity_main">Attendance History</string>
     <string name="title_activity_qrscanner">QR Scanner</string>
+    <string name="title_activity_maps">Map</string>
 
     <!-- Strings related to login -->
     <string name="prompt_username">username</string>
