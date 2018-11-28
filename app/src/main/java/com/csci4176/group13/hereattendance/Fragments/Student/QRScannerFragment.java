@@ -48,7 +48,6 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         final View view = inflater.inflate(R.layout.fragment_qrscanner, container, false);
         qrCodeView = view.findViewById(R.id.QRView);
         //qrResult = view.findViewById(R.id.txt);
