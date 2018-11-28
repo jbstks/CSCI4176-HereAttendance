@@ -3,6 +3,7 @@
     <string name="title_activity_login">Here!</string>
     <string name="title_activity_main">Attendance History</string>
     <string name="title_activity_qrscanner">QR Scanner</string>
+
     <!-- Strings related to login -->
     <string name="prompt_username">username</string>
     <string name="prompt_password">password</string>
@@ -13,15 +14,21 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
 
+    <!-- Strings related to navigation menu -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Attendance</string>
     <string name="nav_header_student_name">John Appleseed</string>
     <string name="nav_header_desc">Navigation header</string>
+
+    <!-- Menu title strings -->
+    <string name="action_share">Share</string>
+    <string name="send_to">Share using</string>
+
+    <!-- TODO: delete these and the rest of QR fragment -->
     <string name="msgCSCI_QRGenerator">Please write CSCI Code</string>
     <string name="msgDate_QRGenerator">Please write Date of Lecture</string>
 
-    <string name="action_settings">Settings</string>
     <!-- This will be overwritten by the course that was selected -->
     <string name="title_activity_class_attendance">CSCI4176</string>
     <!-- This will be overwritten as well -->

@@ -15,23 +15,28 @@ public class ClassAttendanceActivity extends AppCompatActivity {
     FirebaseUser signedInUser = FirebaseAuth.getInstance().getCurrentUser();
     String user;
 
+    /**
+     * Things to be done on activity creation
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_attendance);
 
+        // Check if user is signed in
         if (signedInUser != null)
             user = signedInUser.getEmail();
 
+        // Setting the action bar functionality
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_dialog_close_dark);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_round_close_24px);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FragmentManager fm = getSupportFragmentManager();
-        //fm.beginTransaction().replace(R.id.content, new StudentClassAttendanceFragment()).commit();
-
-        // show/hide content depending on user
+        // Show/hide content depending on user
         if ( user.equals("professor@here.com") )
             fm.beginTransaction().replace(R.id.content, new ProfClassAttendanceFragment()).commit();
         else
