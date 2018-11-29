@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.csci4176.group13.hereattendance.ClassAttendanceActivity;
+import com.csci4176.group13.hereattendance.ProfIndividualAttendanceActivity;
 import com.csci4176.group13.hereattendance.QRGeneratorActivity;
 import com.csci4176.group13.hereattendance.R;
 
@@ -62,6 +64,15 @@ public class ProfClassAttendanceRVAdapter extends RecyclerView.Adapter<ProfClass
                     Intent intent = new Intent(v.getContext(), QRGeneratorActivity.class);
                     intent.putExtra("courseCode", courseCode);
                     intent.putExtra("date", date.getText());
+                    v.getContext().startActivity(intent);
+                }
+            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), ProfIndividualAttendanceActivity.class);
+                    intent.putExtra("lectureNum", lectureNum.getText());
                     v.getContext().startActivity(intent);
                 }
             });

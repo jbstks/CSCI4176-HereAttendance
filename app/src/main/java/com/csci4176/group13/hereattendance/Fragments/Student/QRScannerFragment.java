@@ -1,6 +1,5 @@
 package com.csci4176.group13.hereattendance.Fragments.Student;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,19 +7,14 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.csci4176.group13.hereattendance.MainActivity;
 import com.csci4176.group13.hereattendance.R;
@@ -28,8 +22,6 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -123,9 +115,10 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
 
             // setup the alert builder
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("ALERT");
-            builder.setMessage("Attendance for " +course+" has been registered");
-
+            builder.setTitle("Scan Successful");
+            builder.setMessage("Attendance for " +course.substring(0,8)+" has been registered.");
+            // backend note that the course was scanned
+            Log.d("QR SCAN", course+" has been scanned");
 
             DialogInterface.OnClickListener dialogButtonClick =
                     new DialogInterface.OnClickListener() {

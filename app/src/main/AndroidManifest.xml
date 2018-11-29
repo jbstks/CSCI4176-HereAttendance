@@ -85,8 +85,13 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Fragments.Student.Maps"
-            android:label="@string/title_activity_maps"></activity>
+            android:name=".ProfIndividualAttendanceActivity"
+            android:label="@string/title_activity_class_attendance"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.csci4176.group13.hereattendance.ClassAttendanceActivity" />
+        </activity>
     </application>
 
 </manifest>

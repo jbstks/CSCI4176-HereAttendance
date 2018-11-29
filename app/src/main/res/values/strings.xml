@@ -43,4 +43,7 @@
     <string name="attendance_percent">70%</string>
     <string name="lecture_num">Lecture 1</string>
     <string name="overlay">overlay</string>
+    <string name="student_name">John Appleseed</string>
+    <string name="overall_attendance_label">Overall Attendance</string>
+    <string name="attendance_percent_placeholder">-%</string>
 </resources>
