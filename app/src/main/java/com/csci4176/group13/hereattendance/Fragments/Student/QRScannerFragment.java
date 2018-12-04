@@ -112,7 +112,7 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
             // setup the alert builder
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             builder.setTitle("Scan Successful");
-            builder.setMessage("Attendance for " +course.substring(0,8)+" has been registered.");
+            builder.setMessage("Attendance for " +course+" has been registered.");
             // backend note that the course was scanned
             Log.d("QR SCAN", course+" has been scanned");
 
