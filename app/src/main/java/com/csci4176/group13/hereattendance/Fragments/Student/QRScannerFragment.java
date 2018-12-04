@@ -30,17 +30,15 @@ import java.io.IOException;
  */
 public class QRScannerFragment extends android.support.v4.app.Fragment {
 
+    CameraSource camera;
+    SurfaceView qrCodeView;
+    BarcodeDetector qrDetect;
+    int cameraPermission = 007;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-
-    CameraSource camera;
-    SurfaceView qrCodeView;
-    //TextView qrResult;
-    BarcodeDetector qrDetect;
-    int cameraPermission = 007;
-
     public QRScannerFragment() {
     }
 
@@ -48,10 +46,8 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         final View view = inflater.inflate(R.layout.fragment_qrscanner, container, false);
         qrCodeView = view.findViewById(R.id.QRView);
-        //qrResult = view.findViewById(R.id.txt);
         qrDetect = new BarcodeDetector.Builder(view.getContext())
                 .setBarcodeFormats(Barcode.QR_CODE).build();
         camera = new CameraSource.Builder(view.getContext(), qrDetect).build();

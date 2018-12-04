@@ -62,6 +62,12 @@ public class ClassAttendanceRVAdapter extends RecyclerView.Adapter<ClassAttendan
         return new CurrCourseViewHolder(view);
     }
 
+    /**
+     * Setting the values of the list
+     *
+     * @param holder CurrCourseViewHolder used
+     * @param position position in the ArrayList
+     */
     @Override
     public void onBindViewHolder(final CurrCourseViewHolder holder, int position) {
         holder.lectureNum.setText("Lecture "+ lectureAttendanceData.get(position).getLectureNum());
@@ -72,6 +78,11 @@ public class ClassAttendanceRVAdapter extends RecyclerView.Adapter<ClassAttendan
             holder.isAttended.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_close_black_24px, 0, 0, 0);
     }
 
+    /**
+     * Returns the number of items in the list
+     *
+     * @return int the size of the lectureAttendancesData list
+     */
     @Override
     public int getItemCount() {
         return lectureAttendanceData.size();

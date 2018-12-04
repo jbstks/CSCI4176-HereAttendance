@@ -6,14 +6,20 @@ public class ClassAttendance {
     private String date;
     private boolean attended;
 
-    public ClassAttendance(int l, String d, boolean a) {
-        lectureNum = l;
-        date = d;
-        attended = a;
+    /**
+     * Constructor
+     *
+     * @param lectureNum the lecture number
+     * @param date the date of the lecture
+     * @param attended whether or not it was attended
+     */
+    public ClassAttendance(int lectureNum, String date, boolean attended) {
+        this.lectureNum = lectureNum;
+        this.date = date;
+        this.attended = attended;
     }
 
     /* Get and set methods */
-
     public int getLectureNum() {
         return lectureNum;
     }

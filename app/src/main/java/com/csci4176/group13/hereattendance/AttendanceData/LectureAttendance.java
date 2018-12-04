@@ -1,5 +1,8 @@
 package com.csci4176.group13.hereattendance.AttendanceData;
 
+/**
+ * Data structure to hold the lecture attendance
+ */
 public class LectureAttendance {
 
     private int lectureNum;
@@ -7,22 +10,35 @@ public class LectureAttendance {
     private boolean attended;
     private int attendancePercentage;
 
-    // Student
-    public LectureAttendance(int l, String d, boolean a) {
-        lectureNum = l;
-        date = d;
-        attended = a;
+    /**
+     * Student
+     * Constructor
+     *
+     * @param lectureNum the lecture number
+     * @param date the date of which the lecture took place
+     * @param attended whether or not the lecture was attended
+     */
+    public LectureAttendance(int lectureNum, String date, boolean attended) {
+        this.lectureNum = lectureNum;
+        this.date = date;
+        this.attended = attended;
     }
 
-    // Professor
-    public LectureAttendance(int l, String d, int ap) {
-        lectureNum = l;
-        date = d;
-        attendancePercentage = ap;
+    /**
+     * Professor
+     * Constructor
+     *
+     * @param lectureNum the lecture number
+     * @param date the date of which the lecture took place
+     * @param attendancePercentage the percentage of attendance
+     */
+    public LectureAttendance(int lectureNum, String date, int attendancePercentage) {
+        this.lectureNum = lectureNum;
+        this.date = date;
+        this.attendancePercentage = attendancePercentage;
     }
 
     /* Get and set methods */
-
     public int getLectureNum() {
         return lectureNum;
     }

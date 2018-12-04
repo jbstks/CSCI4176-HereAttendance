@@ -62,6 +62,12 @@ public class CurrCoursesRVAdapter extends RecyclerView.Adapter<CurrCoursesRVAdap
         }
     }
 
+    /**
+     * ProfClassAttendanceViewHolder constructor
+     *
+     * @param parent
+     * @param viewType
+     */
     @Override
     public CurrCourseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -69,6 +75,12 @@ public class CurrCoursesRVAdapter extends RecyclerView.Adapter<CurrCoursesRVAdap
         return new CurrCourseViewHolder(view);
     }
 
+    /**
+     * Setting the values of the list
+     *
+     * @param holder CurrCourseViewHolder used
+     * @param position position in the ArrayList
+     */
     @Override
     public void onBindViewHolder(final CurrCourseViewHolder holder, int position) {
         holder.code.setText(currentCourses.get(position).getCode());
@@ -78,6 +90,11 @@ public class CurrCoursesRVAdapter extends RecyclerView.Adapter<CurrCoursesRVAdap
         holder.attendancePercentage.setText(percentage + "%");
     }
 
+    /**
+     * Returns the number of items in the list
+     *
+     * @return int the size of the currentCourses list
+     */
     @Override
     public int getItemCount() {
         return currentCourses.size();

@@ -32,6 +32,7 @@ public class ProfAttendanceHistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_attendance_history, container, false);
 
+        // Setting up the RecyclerView (list)
         RecyclerView rv = view.findViewById(R.id.rv);
         rv.setHasFixedSize(false);
 

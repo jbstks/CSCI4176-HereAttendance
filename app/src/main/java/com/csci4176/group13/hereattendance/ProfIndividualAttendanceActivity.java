@@ -39,10 +39,12 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_round_close_24px);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // Getting the intent extras
         if (getIntent().getExtras() != null)
             lectureNum = getIntent().getStringExtra("lectureNum");
         setTitle(lectureNum);
 
+        // Setting up the RecyclerView (list)
         RecyclerView rv = findViewById(R.id.rv);
         rv.setHasFixedSize(false);
 

@@ -1,7 +1,5 @@
 package com.csci4176.group13.hereattendance.IndividualStudentAttendanceData;
 
-import android.content.Intent;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +7,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.csci4176.group13.hereattendance.AttendanceData.LectureAttendance;
-import com.csci4176.group13.hereattendance.ProfIndividualAttendanceActivity;
-import com.csci4176.group13.hereattendance.QRGeneratorActivity;
 import com.csci4176.group13.hereattendance.R;
 
 import java.util.List;
@@ -21,7 +16,7 @@ import java.util.List;
  *
  * @author Joanna Bistekos
  */
-public class IndividualStudentAttendanceRVAdapter extends RecyclerView.Adapter<IndividualStudentAttendanceRVAdapter.CurrCourseViewHolder> {
+public class IndividualStudentAttendanceRVAdapter extends RecyclerView.Adapter<IndividualStudentAttendanceRVAdapter.IndividualAttendanceViewHolder> {
 
     private final List<IndividualStudentAttendance> studentAttendancesData;
 
@@ -29,7 +24,6 @@ public class IndividualStudentAttendanceRVAdapter extends RecyclerView.Adapter<I
      * Constructor to create a RecyclerView adapter
      *
      * @param sd the attendance data list
-     * @param cc the course code
      */
     public IndividualStudentAttendanceRVAdapter(List<IndividualStudentAttendance> sd) {
         studentAttendancesData = sd;
@@ -38,13 +32,13 @@ public class IndividualStudentAttendanceRVAdapter extends RecyclerView.Adapter<I
     /**
      * Allows us to select list values individually
      */
-    public static class CurrCourseViewHolder extends RecyclerView.ViewHolder {
+    public static class IndividualAttendanceViewHolder extends RecyclerView.ViewHolder {
 
         public final LinearLayout listItem;
         public final TextView studentName;
         public TextView isAttended;
 
-        CurrCourseViewHolder(View view) {
+        IndividualAttendanceViewHolder(View view) {
             super(view);
 
             listItem = view.findViewById(R.id.listItem);
@@ -53,14 +47,26 @@ public class IndividualStudentAttendanceRVAdapter extends RecyclerView.Adapter<I
         }
     }
 
+    /**
+     * Creates the list items
+     *
+     * @param parent
+     * @param viewType
+     */
     @Override
-    public CurrCourseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public IndividualAttendanceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.individual_attendance_list, parent, false);
-        return new CurrCourseViewHolder(view);
+        return new IndividualAttendanceViewHolder(view);
     }
 
+    /**
+     * Setting the values of the list
+     *
+     * @param holder IndividualAttendanceViewHolder used
+     * @param position position in the ArrayList
+     */
     @Override
-    public void onBindViewHolder(final CurrCourseViewHolder holder, int position) {
+    public void onBindViewHolder(final IndividualAttendanceViewHolder holder, int position) {
         holder.studentName.setText(studentAttendancesData.get(position).getStudentName());
         if (studentAttendancesData.get(position).isAttended())
             holder.isAttended.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_round_done_24px, 0);
@@ -68,6 +74,11 @@ public class IndividualStudentAttendanceRVAdapter extends RecyclerView.Adapter<I
             holder.isAttended.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_round_close_black_24px, 0);
     }
 
+    /**
+     * Returns the number of items in the list
+     *
+     * @return int the size of the studentAttendancesData list
+     */
     @Override
     public int getItemCount() {
         return studentAttendancesData.size();

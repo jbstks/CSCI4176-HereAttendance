@@ -18,6 +18,8 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 /**
  * Fragment for the QR generator
+ *
+ * TODO: Delete this
  */
 public class QRGeneratorFragment extends android.support.v4.app.Fragment {
 
@@ -27,7 +29,7 @@ public class QRGeneratorFragment extends android.support.v4.app.Fragment {
      */
     public QRGeneratorFragment() { }
 
-    Button btnQRGenerate ;
+    Button btnQRGenerate;
     EditText edtQRCSCIText,edtQRDateText;
     ImageView imgQRCode;
 
@@ -55,12 +57,12 @@ public class QRGeneratorFragment extends android.support.v4.app.Fragment {
                     String QRText = strCSCI.concat("_"+strDateLect);
                     Toast.makeText(getContext(),QRText,Toast.LENGTH_SHORT).show();
 
-                    //Generating QR Code For QRText
+                    // Generating QR Code For QRText
                     BitMatrix bitMatrix = multiFormatWriter.encode(QRText, BarcodeFormat.QR_CODE,200,200);
                     BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
                     Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
 
-                    //setting QR Code to ImageView
+                    // setting QR Code to ImageView
                     imgQRCode.setImageBitmap(bitmap);
                 } catch (Exception e) {
                     e.printStackTrace();

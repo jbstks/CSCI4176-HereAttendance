@@ -10,20 +10,15 @@ public class CurrentCourse {
     private int attendancePercent;
 
     /**
-     * Default constructor
-     */
-    public CurrentCourse() {}
-
-    /**
      * Constructor to create a CurrentCourse object with the following data
-     * @param c     the course code
-     * @param n     the course name
-     * @param ap    the percentage of one's/classes attendance in this course (depends on student/prof)
+     * @param code              the course code
+     * @param name              the course name
+     * @param attendancePercent the percentage of one's/classes attendance in this course (depends on student/prof)
      */
-    public CurrentCourse(String c, String n, int ap) {
-        code = c;
-        name = n;
-        attendancePercent = ap;
+    public CurrentCourse(String code, String name, int attendancePercent) {
+        this.code = code;
+        this.name = name;
+        this.attendancePercent = attendancePercent;
     }
 
     /**
