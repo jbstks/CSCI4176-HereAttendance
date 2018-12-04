@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -18,10 +19,14 @@ import android.view.ViewGroup;
 
 import com.csci4176.group13.hereattendance.MainActivity;
 import com.csci4176.group13.hereattendance.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 
@@ -40,6 +45,11 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
     //TextView qrResult;
     BarcodeDetector qrDetect;
     int cameraPermission = 007;
+    int validFormat = 0; // 0 for valid, 1 for not able to update, 2 for invalid
+
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference DatabaseUpdateRef = database.getReference();
 
     public QRScannerFragment() {
     }
@@ -92,8 +102,38 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> codes = detections.getDetectedItems();
-
                 if(codes.size() != 0){
+                    String[] attendanceInfo =codes.valueAt(0).displayValue.split(" ");
+                    if(attendanceInfo.length<4)
+                        validFormat=2;
+                    if(!attendanceInfo[0].matches("CSCI[0-9]..."))
+                        validFormat=2;
+                    if(!attendanceInfo[3].matches("[0-9].*"))
+                        validFormat=2;
+                    DatabaseUpdateRef.child(attendanceInfo[0]).child(attendanceInfo[3]).child("date").setValue(attendanceInfo[1]+" "+attendanceInfo[2]).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            validFormat=0;
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            validFormat=1;
+                        }
+                    });
+                    DatabaseUpdateRef.child(attendanceInfo[0]).child(attendanceInfo[3]).child("student").setValue("true").addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            validFormat=0;
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            validFormat=1;
+                        }
+                    });
+
+
                     qrCodeView.post(new Runnable() {
                         @Override
                         public void run() {
@@ -115,8 +155,20 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
 
             // setup the alert builder
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("Scan Successful");
-            builder.setMessage("Attendance for " +course.substring(0,8)+" has been registered.");
+switch (validFormat) {
+    case 0:
+        builder.setTitle("Scan Successful");
+        builder.setMessage("Attendance for " + course.substring(0, 8) + " has been registered.");
+        break;
+    case 1:
+        builder.setTitle("Update Failed");
+        builder.setMessage("Unable to update attendance. Please check network connection");
+    break;
+    case 2:
+        builder.setTitle("Scan Failed");
+        builder.setMessage("The QR code scanned is improperly formatted");
+        break;
+}
             // backend note that the course was scanned
             Log.d("QR SCAN", course+" has been scanned");
 
