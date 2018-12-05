@@ -107,33 +107,33 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
         return view;
     }
 
-        public void showAlertDialogButtonClicked(String course) {
+    public void showAlertDialogButtonClicked(String course) {
 
-            // setup the alert builder
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("Scan Successful");
-            builder.setMessage("Attendance for " +course+" has been registered.");
-            // backend note that the course was scanned
-            Log.d("QR SCAN", course+" has been scanned");
+        // setup the alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Scan Successful");
+        builder.setMessage("Attendance for " +course+" has been registered.");
+        // backend note that the course was scanned
+        Log.d("QR SCAN", course+" has been scanned");
 
-            DialogInterface.OnClickListener dialogButtonClick =
-                    new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch(which){
-                        case DialogInterface.BUTTON_POSITIVE:
-                            Intent intent = new Intent(getActivity(), MainActivity.class);
-                            startActivity(intent);
-                            break;
-                    }
+        DialogInterface.OnClickListener dialogButtonClick =
+                new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch(which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                        break;
                 }
-            };
+            }
+        };
 
-            // add a button
-            builder.setPositiveButton("OK", dialogButtonClick);
-            // create the alert dialog
-            AlertDialog dialog = builder.create();
-            //show the alert dialog
-            dialog.show();
-        }
+        // add a button
+        builder.setPositiveButton("OK", dialogButtonClick);
+        // create the alert dialog
+        AlertDialog dialog = builder.create();
+        //show the alert dialog
+        dialog.show();
+    }
 }
