@@ -61,7 +61,6 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_qrscanner, container, false);
         qrCodeView = view.findViewById(R.id.QRView);
-        //qrResult = view.findViewById(R.id.txt);
         qrDetect = new BarcodeDetector.Builder(view.getContext())
                 .setBarcodeFormats(Barcode.QR_CODE).build();
         camera = new CameraSource.Builder(view.getContext(), qrDetect).build();
@@ -69,7 +68,7 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
         qrCodeView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                if(ActivityCompat.checkSelfPermission(getContext(),
+                if (ActivityCompat.checkSelfPermission(getContext(),
                         android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
                     ActivityCompat.requestPermissions(getActivity(),
                             new String[]{android.Manifest.permission.CAMERA}, cameraPermission);
@@ -77,7 +76,7 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                 }
                 try {
                     camera.start(qrCodeView.getHolder());
-                }catch (IOException e){
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -102,48 +101,58 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> codes = detections.getDetectedItems();
-                if(codes.size() != 0){
-                    String[] attendanceInfo =codes.valueAt(0).displayValue.split(" ");
-                    if(attendanceInfo.length<4)
-                        validFormat=2;
-                    if(!attendanceInfo[0].matches("CSCI[0-9]..."))
-                        validFormat=2;
-                    if(!attendanceInfo[3].matches("[0-9].*"))
-                        validFormat=2;
-                    DatabaseUpdateRef.child(attendanceInfo[0]).child(attendanceInfo[3]).child("date").setValue(attendanceInfo[1]+" "+attendanceInfo[2]).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            validFormat=0;
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            validFormat=1;
-                        }
-                    });
+                if (codes.size() != 0) {
+                    final String[] attendanceInfo = codes.valueAt(0).displayValue.split(" ");
+                    if (attendanceInfo.length < 4 || !attendanceInfo[0].matches("CSCI[0-9]...") || !attendanceInfo[3].matches("[0-9].*")) {
+                        qrCodeView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Vibrator vibrate = (Vibrator) getActivity().getApplicationContext()
+                                        .getSystemService(Context.VIBRATOR_SERVICE);
+                                vibrate.vibrate(100);
+                                showAlertDialogButtonClicked("TheCourse", 2);
+
+                            }
+                        });
+
+                        release();
+                    }
+                    DatabaseUpdateRef.child(attendanceInfo[0]).child(attendanceInfo[3]).child("date").setValue(attendanceInfo[1] + " " + attendanceInfo[2]);
                     DatabaseUpdateRef.child(attendanceInfo[0]).child(attendanceInfo[3]).child("student").setValue("true").addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            validFormat=0;
+                            validFormat = 0;
+                            qrCodeView.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Vibrator vibrate = (Vibrator) getActivity().getApplicationContext()
+                                            .getSystemService(Context.VIBRATOR_SERVICE);
+                                    vibrate.vibrate(100);
+                                    showAlertDialogButtonClicked(codes.valueAt(0).displayValue, 0);
+
+                                }
+                            });
+                            release();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            validFormat=1;
-                        }
-                    });
+                            validFormat = 1;
+                            qrCodeView.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Vibrator vibrate = (Vibrator) getActivity().getApplicationContext()
+                                            .getSystemService(Context.VIBRATOR_SERVICE);
+                                    vibrate.vibrate(100);
+                                    showAlertDialogButtonClicked(codes.valueAt(0).displayValue, 1);
 
-
-                    qrCodeView.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Vibrator vibrate = (Vibrator)getActivity().getApplicationContext()
-                                    .getSystemService(Context.VIBRATOR_SERVICE);
-                            vibrate.vibrate(100);
-                            showAlertDialogButtonClicked(codes.valueAt(0).displayValue);
+                                }
+                            });
                             release();
                         }
                     });
+
+
                 }
             }
         });
@@ -151,45 +160,47 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
         return view;
     }
 
-        public void showAlertDialogButtonClicked(String course) {
+    public void showAlertDialogButtonClicked(String course, int validFormat) {
 
-            // setup the alert builder
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-switch (validFormat) {
-    case 0:
-        builder.setTitle("Scan Successful");
-        builder.setMessage("Attendance for " + course.substring(0, 8) + " has been registered.");
-        break;
-    case 1:
-        builder.setTitle("Update Failed");
-        builder.setMessage("Unable to update attendance. Please check network connection");
-    break;
-    case 2:
-        builder.setTitle("Scan Failed");
-        builder.setMessage("The QR code scanned is improperly formatted");
-        break;
-}
-            // backend note that the course was scanned
-            Log.d("QR SCAN", course+" has been scanned");
-
-            DialogInterface.OnClickListener dialogButtonClick =
-                    new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch(which){
-                        case DialogInterface.BUTTON_POSITIVE:
-                            Intent intent = new Intent(getActivity(), MainActivity.class);
-                            startActivity(intent);
-                            break;
-                    }
-                }
-            };
-
-            // add a button
-            builder.setPositiveButton("OK", dialogButtonClick);
-            // create the alert dialog
-            AlertDialog dialog = builder.create();
-            //show the alert dialog
-            dialog.show();
+        // setup the alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        switch (validFormat) {
+            case 0:
+                builder.setTitle("Scan Successful");
+                builder.setMessage("Attendance for " + course.substring(0, 8) + " has been registered.");
+                break;
+            case 1:
+                builder.setTitle("Update Failed");
+                builder.setMessage("Unable to update attendance. Please check network connection");
+                break;
+            case 2:
+                builder.setTitle("Scan Failed");
+                builder.setMessage("The QR code scanned is improperly formatted");
+                break;
         }
+        // backend note that the course was scanned
+        Log.d("QR SCAN", course + " has been scanned");
+
+        DialogInterface.OnClickListener dialogButtonClick =
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                Intent intent = new Intent(getActivity(), MainActivity.class);
+                                startActivity(intent);
+                                break;
+                        }
+                    }
+                };
+
+        // add a button
+        builder.setPositiveButton("OK", dialogButtonClick);
+        // create the alert dialog
+        AlertDialog dialog = builder.create();
+        //show the alert dialog
+        dialog.show();
+    }
+
+
 }
