@@ -133,7 +133,7 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
         builder.setPositiveButton("OK", dialogButtonClick);
         // create the alert dialog
         AlertDialog dialog = builder.create();
-        //show the alert dialog
+        // show the alert dialog
         dialog.show();
     }
 }
