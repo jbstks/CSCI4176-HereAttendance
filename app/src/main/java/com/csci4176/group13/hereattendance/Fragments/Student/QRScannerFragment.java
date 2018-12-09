@@ -99,8 +99,12 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> codes = detections.getDetectedItems();
                 if (codes.size() != 0) {
+
+
                     final String[] attendanceInfo = codes.valueAt(0).displayValue.split(" ");
                     if (attendanceInfo.length < 4 || !attendanceInfo[0].matches("CSCI[0-9]...") || !attendanceInfo[3].matches("[0-9].*")) {
+
+
                         qrCodeView.post(new Runnable() {
                             @Override
                             public void run() {
@@ -108,46 +112,52 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                                         .getSystemService(Context.VIBRATOR_SERVICE);
                                 vibrate.vibrate(100);
                                 showAlertDialogButtonClicked("TheCourse", 2);
+                                release();
 
                             }
                         });
 
-                        release();
+
+                    } else {
+                        DatabaseUpdateRef.child(attendanceInfo[0]).child(attendanceInfo[3]).child("date").setValue(attendanceInfo[1] + " " + attendanceInfo[2]);
+                        DatabaseUpdateRef.child(attendanceInfo[0]).child(attendanceInfo[3]).child("student").setValue("true").addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+
+                                validFormat = 0;
+                                qrCodeView.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Vibrator vibrate = (Vibrator) getActivity().getApplicationContext()
+                                                .getSystemService(Context.VIBRATOR_SERVICE);
+                                        vibrate.vibrate(100);
+                                        showAlertDialogButtonClicked(codes.valueAt(0).displayValue, 0);
+
+                                    }
+                                });
+                                release();
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                                validFormat = 1;
+                                qrCodeView.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Vibrator vibrate = (Vibrator) getActivity().getApplicationContext()
+                                                .getSystemService(Context.VIBRATOR_SERVICE);
+                                        vibrate.vibrate(100);
+                                        showAlertDialogButtonClicked(codes.valueAt(0).displayValue, 1);
+
+                                    }
+                                });
+                                release();
+
+                            }
+                        });
                     }
-                    DatabaseUpdateRef.child(attendanceInfo[0]).child(attendanceInfo[3]).child("date").setValue(attendanceInfo[1] + " " + attendanceInfo[2]);
-                    DatabaseUpdateRef.child(attendanceInfo[0]).child(attendanceInfo[3]).child("student").setValue("true").addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            validFormat = 0;
-                            qrCodeView.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Vibrator vibrate = (Vibrator) getActivity().getApplicationContext()
-                                            .getSystemService(Context.VIBRATOR_SERVICE);
-                                    vibrate.vibrate(100);
-                                    showAlertDialogButtonClicked(codes.valueAt(0).displayValue, 0);
-
-                                }
-                            });
-                            release();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            validFormat = 1;
-                            qrCodeView.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Vibrator vibrate = (Vibrator) getActivity().getApplicationContext()
-                                            .getSystemService(Context.VIBRATOR_SERVICE);
-                                    vibrate.vibrate(100);
-                                    showAlertDialogButtonClicked(codes.valueAt(0).displayValue, 1);
-
-                                }
-                            });
-                            release();
-                        }
-                    });
 
 
                 }
