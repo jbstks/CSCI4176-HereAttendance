@@ -6,9 +6,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.csci4176.group13.hereattendance.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -17,10 +19,14 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class Maps extends Fragment implements OnMapReadyCallback {
+import java.util.ArrayList;
+import java.util.List;
 
+public class Maps extends Fragment implements OnMapReadyCallback {
+    //Initialise Google Map
     private GoogleMap mMap;
     private MapView mapView;
 
@@ -49,5 +55,33 @@ public class Maps extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
+        // Define LatLng For the location
+        final LatLng TB = new LatLng(44.639235, -63.583832);
+        final LatLng LSC = new LatLng(44.635908, -63.593811);
+        final LatLng GB = new LatLng(44.637413, -63.587184);
+
+        //Define Marker
+        Marker mTB,mLSC,mGB;
+
+        //Creating an ArrayList to store Markers
+        List<Marker> markerList = new ArrayList<>();
+
+        mTB = mMap.addMarker(new MarkerOptions().position(TB).title("Tupper Building"));
+        markerList.add(mTB);
+
+        mLSC = mMap.addMarker(new MarkerOptions().position(LSC).title("Life Science Centre"));
+        markerList.add(mLSC);
+
+        mGB = mMap.addMarker(new MarkerOptions().position(GB).title("Goldberg Computer Science Building"));
+        markerList.add(mGB);
+
+        for (Marker ma : markerList) {
+            LatLng latlng = new LatLng(ma.getPosition().latitude, (ma.getPosition().longitude));
+            googleMap.addMarker(new MarkerOptions().position(latlng));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 15));
+        }
     }
 }
+
+

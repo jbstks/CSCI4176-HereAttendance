@@ -37,4 +37,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.0.3'
     implementation 'com.google.android.gms:play-services-vision:17.0.2'
     implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
+    compile 'com.google.android.gms:play-services:11.4.0'
 }
