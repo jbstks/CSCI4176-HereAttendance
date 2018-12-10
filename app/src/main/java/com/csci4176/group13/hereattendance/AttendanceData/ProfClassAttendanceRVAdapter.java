@@ -72,6 +72,8 @@ public class ProfClassAttendanceRVAdapter extends RecyclerView.Adapter<ProfClass
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(), ProfIndividualAttendanceActivity.class);
                     intent.putExtra("lectureNum", lectureNum.getText());
+                    intent.putExtra("CourseCode", courseCode);
+
                     v.getContext().startActivity(intent);
                 }
             });
