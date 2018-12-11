@@ -1,19 +1,19 @@
 package com.csci4176.group13.hereattendance.Fragments.Professor;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+        import android.os.Bundle;
+        import android.support.v4.app.Fragment;
+        import android.support.v7.widget.LinearLayoutManager;
+        import android.support.v7.widget.RecyclerView;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
 
-import com.csci4176.group13.hereattendance.CurrentCourses.CurrCoursesRVAdapter;
-import com.csci4176.group13.hereattendance.CurrentCourses.CurrentCourse;
-import com.csci4176.group13.hereattendance.R;
+        import com.csci4176.group13.hereattendance.CurrentCourses.CurrCoursesRVAdapter;
+        import com.csci4176.group13.hereattendance.CurrentCourses.CurrentCourse;
+        import com.csci4176.group13.hereattendance.R;
 
-import java.util.ArrayList;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.List;
 
 /**
  * Fragment to hold list values of current courses
@@ -26,7 +26,7 @@ public class ProfAttendanceHistoryFragment extends Fragment {
      */
     public ProfAttendanceHistoryFragment() {
     }
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,10 +42,10 @@ public class ProfAttendanceHistoryFragment extends Fragment {
         List<CurrentCourse> currentCourses;
         currentCourses = new ArrayList<>();
 
-        currentCourses.add(new CurrentCourse("CSCI3130", "Software Engineering", 60));
-        currentCourses.add(new CurrentCourse("CSCI3130", "Software Engineering", 60));
-        currentCourses.add(new CurrentCourse("CSCI4176", "Mobile Computing", 75));
-        currentCourses.add(new CurrentCourse("CSCI3110", "Algorithms", 98));
+        currentCourses.add(new CurrentCourse("CSCI3130", "Software Engineering", 9 * 100 / 14));
+        currentCourses.add(new CurrentCourse("CSCI3130", "Software Engineering", 9 * 100 / 14));
+        currentCourses.add(new CurrentCourse("CSCI4176", "Mobile Computing", 8 * 100 / 14));
+        currentCourses.add(new CurrentCourse("CSCI3110", "Algorithms", 8 * 100 / 12));
 
         CurrCoursesRVAdapter adapter = new CurrCoursesRVAdapter(currentCourses);
         rv.setAdapter(adapter);
