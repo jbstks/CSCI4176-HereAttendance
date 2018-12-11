@@ -43,6 +43,8 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
     List<IndividualStudentAttendance> studentAttendance = new ArrayList<>();
     IndividualStudentAttendanceRVAdapter adapter = new IndividualStudentAttendanceRVAdapter(studentAttendance);
     boolean studentAttended = false;
+    int numStudents = 12;
+    double attendedPercent=0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,9 +83,13 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
                                 if (courseLecture.hasChild("student")) {
                                     studentAttendance.add(new IndividualStudentAttendance("Appleseed, John", true));
                                     studentAttended = true;
+                                    attendedPercent=(attendedPercent*numStudents + 1)/(numStudents+1);
+                                    percentage.setText((int)attendedPercent+" %");
+
                                 } else {
                                     studentAttendance.add(new IndividualStudentAttendance("Appleseed, John", false));
-
+                                    attendedPercent=(attendedPercent*numStudents)/(numStudents+1);
+                                    percentage.setText((int)attendedPercent+" %");
                                 }
 
                         }
@@ -120,18 +126,11 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
         }
 
         if (courseCode.equals("CSCI3110")) {
-
-            if (attended) {
-                if (studentAttended)
-                    percentage.setText(10 * 100 / 12 + " %");
-                else
-                    percentage.setText(9 * 100 / 12 + " %");
-
+numStudents=12;
+            if (!attended) {
+                    attendedPercent=(9.0 * 100.0 / 12.0);
             } else {
-                if (studentAttended)
-                    percentage.setText(3 * 100 / 12 + " %");
-                else
-                    percentage.setText(2 * 100 / 12 + " %");
+                attendedPercent=(2.0 * 100.0 / 12.0);
             }
             studentAttendance.add(new IndividualStudentAttendance("Abarbanel, Sarah", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Appleseed, John", !attended));
@@ -146,20 +145,17 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
             studentAttendance.add(new IndividualStudentAttendance("Fidel,Vo", !attended));
         }
         if (courseCode.equals("CSCI3130")) {
+            numStudents=14;
 
             if (attended) {
 
 
-                if (studentAttended)
-                    percentage.setText(4 * 100 / 14 + " %");
-                else
-                    percentage.setText(3 * 100 / 14 + " %");
+
+                attendedPercent=(3.0 * 100.0 / 14.0);
 
             } else {
-                if (studentAttended)
-                    percentage.setText(11 * 100 / 14 + " %");
-                else
-                    percentage.setText(10 * 100 / 14 + " %");
+
+                attendedPercent=(10 * 100 / 14);
             }
 
             studentAttendance.add(new IndividualStudentAttendance("Bert, Beaver", !attended));
@@ -177,17 +173,12 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
             studentAttendance.add(new IndividualStudentAttendance("Eveline, Wiemer", !attended));
         }
         if (courseCode.equals("CSCI4176")) {
-            if (attended) {
-                if (studentAttended)
-                    percentage.setText(4 * 100 / 14 + " %");
-                else
-                    percentage.setText(3 * 100 / 14 + " %");
+            numStudents=14;
 
+            if (attended) {
+                attendedPercent=(3.0 * 100.0 / 14.0);
             } else {
-                if (studentAttended)
-                    percentage.setText(11 * 100 / 14 + " %");
-                else
-                    percentage.setText(10 * 100 / 14 + " %");
+                attendedPercent=(10 * 100 / 14);
             }
 
             studentAttendance.add(new IndividualStudentAttendance("Mi, Welle", !attended));
@@ -205,6 +196,7 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
             studentAttendance.add(new IndividualStudentAttendance("Vi, Hoelscher", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Chia, Luera", !attended));
         }
+        percentage.setText((int)attendedPercent+" %");
         rv.setAdapter(adapter);
     }
 }
