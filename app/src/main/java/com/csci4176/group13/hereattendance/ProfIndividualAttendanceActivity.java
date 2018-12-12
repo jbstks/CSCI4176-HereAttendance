@@ -147,7 +147,7 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
                 attendedPercent=(2.0 * 100.0 / numStudents);
             }
             studentAttendance.add(new IndividualStudentAttendance("Abarbanel, Sarah", !attended));
-            studentAttendance.add(new IndividualStudentAttendance("Appleseed, John", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Balboa, Porky", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Bistekos, Joanna", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Campbell, Susan", attended));
             studentAttendance.add(new IndividualStudentAttendance("Daniels, Daniel", !attended));
