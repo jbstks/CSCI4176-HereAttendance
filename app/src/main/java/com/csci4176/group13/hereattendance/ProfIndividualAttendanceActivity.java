@@ -42,8 +42,11 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
     TextView percentage;
     List<IndividualStudentAttendance> studentAttendance = new ArrayList<>();
     IndividualStudentAttendanceRVAdapter adapter = new IndividualStudentAttendanceRVAdapter(studentAttendance);
-    boolean studentAttended = false;
+
+    // we need this to calculate the attendance for a given day
     int numStudents = 12;
+
+    // this is the number that will be displayed BEFORE the database pull changes the text
     double attendedPercent=0;
 
     @Override
@@ -71,16 +74,24 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
 
+        // pulling from the database to see if student attended this lecture
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                    //if this snapshot is for the right course
                     if (snapshot.getKey().equals(courseCode)) {
                         for (DataSnapshot courseLecture : snapshot.getChildren()) {
+
+                            // if this snapshot is for the right lecture
                             if (courseLecture.getKey().equals("" + lectureNum.charAt(8)))
                                 if (courseLecture.hasChild("student")) {
+
+                                // add student to arraylist
                                     studentAttendance.add(new IndividualStudentAttendance("Appleseed, John", true));
-                                    studentAttended = true;
+
+                                    // adjust percent attendance to reflect and additional student being there
                                     attendedPercent=(attendedPercent*numStudents + 1)/(numStudents+1);
                                     percentage.setText((int)attendedPercent+"%");
 
@@ -101,7 +112,8 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
             }
         });
 
-        // TODO pull database data to change attendance data, also need a way to set the attendance outside of the setting the adapter values, I'll just spoof it
+        // This just switches up who attended and who didn't. It adds variety rather than
+        // showing that 65% attended during every lecture, etc
         boolean attended = false;
         switch (lectureNum) {
             case "Lecture 1":
@@ -125,15 +137,17 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
         }
 
         if (courseCode.equals("CSCI3110")) {
-            numStudents = 12;
 
+            // Again, each course has different students
+            // this if/else calculates the attendance percent based on the boolean value we just set
+            numStudents = 12;
             if (!attended) {
-                attendedPercent=(9.0 * 100.0 / 12.0);
+                attendedPercent=(9.0 * 100.0 / numStudents);
             } else {
-                attendedPercent=(2.0 * 100.0 / 12.0);
+                attendedPercent=(2.0 * 100.0 / numStudents);
             }
             studentAttendance.add(new IndividualStudentAttendance("Abarbanel, Sarah", !attended));
-            studentAttendance.add(new IndividualStudentAttendance("Appleseed, John", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Balboa, Porky", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Bistekos, Joanna", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Campbell, Susan", attended));
             studentAttendance.add(new IndividualStudentAttendance("Daniels, Daniel", !attended));
@@ -148,9 +162,9 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
             numStudents=14;
 
             if (attended) {
-                attendedPercent=(3.0 * 100.0 / 14.0);
+                attendedPercent=(3.0 * 100.0 / numStudents);
             } else {
-                attendedPercent=(10 * 100 / 14);
+                attendedPercent=(10 * 100 / numStudents);
             }
 
             studentAttendance.add(new IndividualStudentAttendance("Bert, Beaver", !attended));
@@ -172,9 +186,9 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
             numStudents=14;
 
             if (attended) {
-                attendedPercent=(3.0 * 100.0 / 14.0);
+                attendedPercent=(3.0 * 100.0 / numStudents);
             } else {
-                attendedPercent=(10 * 100 / 14);
+                attendedPercent=(10 * 100 / numStudents);
             }
 
             studentAttendance.add(new IndividualStudentAttendance("Mi, Welle", !attended));
