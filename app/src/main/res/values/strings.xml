@@ -30,20 +30,27 @@
     <string name="msgCSCI_QRGenerator">Please write CSCI Code</string>
     <string name="msgDate_QRGenerator">Please write Date of Lecture</string>
 
-    <!-- This will be overwritten by the course that was selected -->
+    <!-- These will be overwritten by the course that was selected -->
     <string name="title_activity_class_attendance">CSCI4176</string>
-    <!-- This will be overwritten as well -->
     <string name="title_activity_qrgenerator">CSCI4176</string>
+
     <string name="nav_attendancehistory">Attendance History</string>
     <string name="nav_qrscanner">QR Scanner</string>
     <string name="nav_map">Map</string>
     <string name="nav_logout">Logout</string>
     <string name="nav_qrgenerator">QR Generator</string>
-    <string name="lecture_date">September 3</string>
-    <string name="attendance_percent">70%</string>
-    <string name="lecture_num">Lecture 1</string>
-    <string name="overlay">overlay</string>
+
+    <string name="content_description_overlay">overlay</string>
+    <string name="content_description_qr_code">QR code</string>
     <string name="student_name">John Appleseed</string>
+
     <string name="overall_attendance_label">Overall Attendance</string>
+    <string name="days_attended_label">Days Attended</string>
+
     <string name="attendance_percent_placeholder">-%</string>
+    <string name="days_attended_placeholder">- of -</string>
+    <string name="course_name_placeholder">Software Engineering</string>
+    <string name="course_code_placeholder">CSCI3130</string>
+    <string name="lecture_date_placeholder">September 3</string>
+    <string name="lecture_num_placeholder">Lecture 1</string>
 </resources>

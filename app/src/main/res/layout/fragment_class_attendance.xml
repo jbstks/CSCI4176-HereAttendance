@@ -52,13 +52,13 @@
                         android:id="@+id/overallAttendance_label"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Overall Attendance" />
+                        android:text="@string/overall_attendance_label" />
 
                     <TextView
                         android:id="@+id/overallAttendancePercent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="-%"
+                        android:text="@string/attendance_percent_placeholder"
                         android:textAppearance="@android:style/TextAppearance.Material.Headline"
                         android:textSize="30sp" />
                 </LinearLayout>
@@ -84,13 +84,13 @@
                         android:id="@+id/daysAttended_label"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Days Attended" />
+                        android:text="@string/days_attended_label" />
 
                     <TextView
                         android:id="@+id/daysAttendedNum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="- of -"
+                        android:text="@string/days_attended_placeholder"
                         android:textAppearance="@android:style/TextAppearance.Material.Headline"
                         android:textSize="30sp" />
                 </LinearLayout>

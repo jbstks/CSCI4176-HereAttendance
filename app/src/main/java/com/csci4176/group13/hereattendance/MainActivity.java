@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.csci4176.group13.hereattendance.Fragments.Professor.ProfAttendanceHistoryFragment;
-import com.csci4176.group13.hereattendance.Fragments.Professor.QRGeneratorFragment;
 import com.csci4176.group13.hereattendance.Fragments.Student.Maps;
 import com.csci4176.group13.hereattendance.Fragments.Student.StudentAttendanceHistoryFragment;
 import com.csci4176.group13.hereattendance.Fragments.Student.QRScannerFragment;
@@ -114,11 +113,6 @@ public class MainActivity extends AppCompatActivity
             currentPage = new QRScannerFragment();
             getSupportActionBar().setTitle("QR Scanner");
         }
-        // TODO: Remove this
-        /*else if (id == R.id.nav_qrgenerator) {
-            currentPage = new QRGeneratorFragment();
-            getSupportActionBar().setTitle("QR Generator");
-        }*/
         else if (id == R.id.nav_map) {
             currentPage = new Maps();
             getSupportActionBar().setTitle("Map");

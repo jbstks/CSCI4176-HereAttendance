@@ -44,11 +44,6 @@ public class Maps extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.activity_maps, container, false);
-        // TODO: get rid of commented out code
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-//        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
-//                .findFragmentById(R.id.maps);
-//        mapFragment.getMapAsync(this);
         getLocationPermission();
         return view;
     }
@@ -63,8 +58,6 @@ public class Maps extends Fragment implements OnMapReadyCallback {
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
 

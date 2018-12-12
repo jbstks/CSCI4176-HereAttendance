@@ -29,7 +29,8 @@
         <ImageView
             android:id="@+id/imgQRCode"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:contentDescription="@string/content_description_qr_code" />
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

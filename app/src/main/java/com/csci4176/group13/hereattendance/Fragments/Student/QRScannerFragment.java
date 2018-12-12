@@ -102,8 +102,9 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
 
 
                     final String[] attendanceInfo = codes.valueAt(0).displayValue.split(" ");
-                    if (attendanceInfo.length < 4 || !attendanceInfo[0].matches("CSCI[0-9]...") || !attendanceInfo[3].matches("[0-9].*")) {
-
+                    if (attendanceInfo.length < 4 ||
+                            !attendanceInfo[0].matches("CSCI[0-9]...") ||
+                            !attendanceInfo[3].matches("[0-9].*")) {
 
                         qrCodeView.post(new Runnable() {
                             @Override
@@ -113,7 +114,6 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                                 vibrate.vibrate(100);
                                 showAlertDialogButtonClicked("TheCourse", 2);
                                 release();
-
                             }
                         });
 

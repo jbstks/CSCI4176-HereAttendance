@@ -16,7 +16,7 @@
         android:id="@+id/overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/overlay"
+        android:contentDescription="@string/content_description_overlay"
         android:paddingStart="32dp"
         android:paddingEnd="32dp"
         android:src="@drawable/ic_qrscan_overlay" />

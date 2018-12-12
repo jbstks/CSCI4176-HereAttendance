@@ -59,13 +59,13 @@ public class ProfClassAttendanceRVAdapter extends RecyclerView.Adapter<ProfClass
             //TODO: Jo, for some reason this isn't setting the text. If you can figure it out, it will make this look a little more convincing
             switch (courseCode) {
                 case ("CSCI3110"):
-                    overallAttendancePercent.setText(8 * 100 / 12 + " %");
+                    overallAttendancePercent.setText(8 * 100 / 12 + "%");
                     break;
                 case ("CSCI3130"):
-                    overallAttendancePercent.setText(9 * 100 / 14 + " %");
+                    overallAttendancePercent.setText(9 * 100 / 14 + "%");
                     break;
                 case ("CSCI4176"):
-                    overallAttendancePercent.setText(8 * 100 / 14 + " %");
+                    overallAttendancePercent.setText(8 * 100 / 14 + "%");
                     break;
             }
 
@@ -88,7 +88,6 @@ public class ProfClassAttendanceRVAdapter extends RecyclerView.Adapter<ProfClass
                     Intent intent = new Intent(v.getContext(), ProfIndividualAttendanceActivity.class);
                     intent.putExtra("lectureNum", lectureNum.getText());
                     intent.putExtra("CourseCode", courseCode);
-
                     v.getContext().startActivity(intent);
                 }
             });
