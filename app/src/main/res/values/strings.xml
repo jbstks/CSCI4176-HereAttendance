@@ -26,10 +26,6 @@
     <string name="action_share">Share</string>
     <string name="send_to">Share using</string>
 
-    <!-- TODO: delete these and the rest of QR fragment -->
-    <string name="msgCSCI_QRGenerator">Please write CSCI Code</string>
-    <string name="msgDate_QRGenerator">Please write Date of Lecture</string>
-
     <!-- These will be overwritten by the course that was selected -->
     <string name="title_activity_class_attendance">CSCI4176</string>
     <string name="title_activity_qrgenerator">CSCI4176</string>

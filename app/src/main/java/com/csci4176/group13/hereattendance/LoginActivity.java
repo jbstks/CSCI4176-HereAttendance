@@ -99,9 +99,6 @@ public class LoginActivity extends AppCompatActivity {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        /*if (mAuthTask != null) {
-            return;
-        }*/
 
         // Reset errors.
         mUserView.setError(null);
@@ -140,8 +137,7 @@ public class LoginActivity extends AppCompatActivity {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            //mAuthTask = new UserLoginTask(user, password);
-            //mAuthTask.execute((Void) null);
+
             String userEmail = user+"@here.com";
             mAuth.signInWithEmailAndPassword(userEmail, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -159,20 +155,18 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.LENGTH_SHORT).show();
                                 updateUI(null);
                             }
-
-                            // ...
                         }
                     });
         }
     }
 
     private boolean isUserValid(String user) {
-        //TODO: Replace this with your own logic
+        // placeholder for if we had username rules
         return true;
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
+        // placeholder for if we had username rules
         return password.length() > 4;
     }
 
@@ -185,11 +179,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void updateUI(FirebaseUser user) {
         showProgress(false);
-        if (user == null) {
-            //setContentView(R.layout.activity_login);
-            /*mPasswordView.setError(getString(R.string.error_incorrect_password));
-            mPasswordView.requestFocus();*/
-        } else {
+        if (user != null) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
@@ -247,8 +237,6 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
             try {
                 // Simulate network access.
                 Thread.sleep(2000);

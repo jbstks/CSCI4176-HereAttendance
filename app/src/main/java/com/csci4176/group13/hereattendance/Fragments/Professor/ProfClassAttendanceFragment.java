@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.csci4176.group13.hereattendance.AttendanceData.ProfClassAttendanceRVAdapter;
 import com.csci4176.group13.hereattendance.AttendanceData.LectureAttendance;
@@ -22,6 +23,7 @@ import java.util.List;
 public class ProfClassAttendanceFragment extends Fragment {
 
     CardView daysAttended;
+    TextView overallAttendancePercent;
     String courseCode;
 
     /**
@@ -39,6 +41,10 @@ public class ProfClassAttendanceFragment extends Fragment {
         // Hide daysAttended because it should only be seen by a student
         daysAttended = (CardView) view.findViewById(R.id.daysAttended);
         daysAttended.setVisibility(View.GONE);
+
+        // TODO: Sarah, this is what you're looking for. I have hardcoded it for now.
+        overallAttendancePercent = (TextView) view.findViewById(R.id.overallAttendancePercent);
+        overallAttendancePercent.setText("75%");
 
         if (getActivity().getIntent().getExtras() != null)
             courseCode = getActivity().getIntent().getStringExtra("courseCode");
