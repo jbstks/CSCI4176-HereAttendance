@@ -62,22 +62,22 @@ public class ProfClassAttendanceFragment extends Fragment {
             case ("CSCI3110"):
                 overallAttendancePercent.setText(8 * 100 / 12 + "%");
                 lectureAttendance.add(new LectureAttendance(1, "October 8", 75));
-                lectureAttendance.add(new LectureAttendance(2, "October 10", 0));
+                lectureAttendance.add(new LectureAttendance(2, "October 10", 16));
                 lectureAttendance.add(new LectureAttendance(3, "October 12", 75));
                 lectureAttendance.add(new LectureAttendance(4, "October 18", 0));
                 break;
             case ("CSCI3130"):
                 overallAttendancePercent.setText(9 * 100 / 14 + "%");
-                lectureAttendance.add(new LectureAttendance(1, "October 9", 75));
-                lectureAttendance.add(new LectureAttendance(2, "October 11", 0));
-                lectureAttendance.add(new LectureAttendance(3, "October 16", 75));
+                lectureAttendance.add(new LectureAttendance(1, "October 9", 71));
+                lectureAttendance.add(new LectureAttendance(2, "October 11", 21));
+                lectureAttendance.add(new LectureAttendance(3, "October 16", 71));
                 lectureAttendance.add(new LectureAttendance(4, "October 18", 0));
                 break;
             case ("CSCI4176"):
                 overallAttendancePercent.setText(8 * 100 / 14 + "%");
-                lectureAttendance.add(new LectureAttendance(1, "October 8", 75));
-                lectureAttendance.add(new LectureAttendance(2, "October 10", 0));
-                lectureAttendance.add(new LectureAttendance(3, "October 12", 75));
+                lectureAttendance.add(new LectureAttendance(1, "October 8", 71));
+                lectureAttendance.add(new LectureAttendance(2, "October 10", 21));
+                lectureAttendance.add(new LectureAttendance(3, "October 12", 71));
                 lectureAttendance.add(new LectureAttendance(4, "October 17", 0));
                 break;
         }
