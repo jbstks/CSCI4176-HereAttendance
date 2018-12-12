@@ -1,6 +1,7 @@
 package com.csci4176.group13.hereattendance;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.csci4176.group13.hereattendance.Fragments.Professor.ProfAttendanceHistoryFragment;
@@ -57,7 +59,8 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        TextView nav_user = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_name);
+        TextView nav_name = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_name);
+        ImageView nav_avatar = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.avatar);
 
         navigationView.setNavigationItemSelectedListener(this);
         // Defaulting to the Attendance History fragment
@@ -70,12 +73,14 @@ public class MainActivity extends AppCompatActivity
             Menu navMenu = navigationView.getMenu();
             navMenu.findItem(R.id.nav_qrscanner).setVisible(false);
             navMenu.findItem(R.id.nav_map).setVisible(false);
-            nav_user.setText("Dr. Ben Kenobi");
+            nav_name.setText("Dr. Benjamin Kenobi");
+            // Photo by Benjamin Parker on Unsplash. However, crediting isn't required as per https://unsplash.com/license
+            nav_avatar.setImageResource(R.drawable.avatar_ben_kenobi);
         } else {
             fm.beginTransaction().replace(R.id.content, new StudentAttendanceHistoryFragment()).commit();
             Menu navMenu = navigationView.getMenu();
             navMenu.findItem(R.id.nav_qrscanner).setVisible(true);
-            nav_user.setText("John Appleseed");
+            nav_name.setText("John Appleseed");
         }
     }
 
