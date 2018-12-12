@@ -71,9 +71,10 @@ public class ProfClassAttendanceFragment extends Fragment {
         lectureAttendance = new ArrayList<>();
 
         lectureAttendance.add(new LectureAttendance(1, "September 4", 75));
-        lectureAttendance.add(new LectureAttendance(2, "September 8", 0));
+        lectureAttendance.add(new LectureAttendance(2, "September 8", 75));
         lectureAttendance.add(new LectureAttendance(3, "September 12", 75));
-        lectureAttendance.add(new LectureAttendance(4, "September 14", 75));
+        // attendance percent is 0 so that it shows the QR generate button
+        lectureAttendance.add(new LectureAttendance(4, "September 14", 0));
         ProfClassAttendanceRVAdapter adapter = new ProfClassAttendanceRVAdapter(lectureAttendance, courseCode);
         rv.setAdapter(adapter);
 

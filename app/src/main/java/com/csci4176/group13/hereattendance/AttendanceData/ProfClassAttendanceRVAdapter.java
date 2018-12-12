@@ -123,6 +123,9 @@ public class ProfClassAttendanceRVAdapter extends RecyclerView.Adapter<ProfClass
             holder.overallAttendancePercent.setText(Integer.toString(lectureAttendanceData.get(position).getAttendancePercentage()) + "%");
             holder.overallAttendancePercent.setVisibility(View.VISIBLE);
             holder.qrGenBtn.setVisibility(View.GONE);
+        } else {
+            holder.overallAttendancePercent.setVisibility(View.GONE);
+            holder.qrGenBtn.setVisibility(View.VISIBLE);
         }
     }
 
