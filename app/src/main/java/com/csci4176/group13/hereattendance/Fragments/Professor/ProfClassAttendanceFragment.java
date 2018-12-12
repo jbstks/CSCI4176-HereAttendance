@@ -64,24 +64,23 @@ public class ProfClassAttendanceFragment extends Fragment {
                 lectureAttendance.add(new LectureAttendance(1, "October 8", 75));
                 lectureAttendance.add(new LectureAttendance(2, "October 10", 0));
                 lectureAttendance.add(new LectureAttendance(3, "October 12", 75));
-                lectureAttendance.add(new LectureAttendance(4, "October 18", 75));
+                lectureAttendance.add(new LectureAttendance(4, "October 18", 0));
                 break;
             case ("CSCI3130"):
                 overallAttendancePercent.setText(9 * 100 / 14 + "%");
                 lectureAttendance.add(new LectureAttendance(1, "October 9", 75));
                 lectureAttendance.add(new LectureAttendance(2, "October 11", 0));
                 lectureAttendance.add(new LectureAttendance(3, "October 16", 75));
-                lectureAttendance.add(new LectureAttendance(4, "October 18", 75));
+                lectureAttendance.add(new LectureAttendance(4, "October 18", 0));
                 break;
             case ("CSCI4176"):
                 overallAttendancePercent.setText(8 * 100 / 14 + "%");
                 lectureAttendance.add(new LectureAttendance(1, "October 8", 75));
                 lectureAttendance.add(new LectureAttendance(2, "October 10", 0));
                 lectureAttendance.add(new LectureAttendance(3, "October 12", 75));
-                lectureAttendance.add(new LectureAttendance(4, "October 17", 75));
+                lectureAttendance.add(new LectureAttendance(4, "October 17", 0));
                 break;
         }
-
 
         ProfClassAttendanceRVAdapter adapter = new ProfClassAttendanceRVAdapter(lectureAttendance, courseCode);
         rv.setAdapter(adapter);

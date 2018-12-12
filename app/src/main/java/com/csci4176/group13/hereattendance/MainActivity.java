@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.csci4176.group13.hereattendance.Fragments.Professor.ProfAttendanceHistoryFragment;
 import com.csci4176.group13.hereattendance.Fragments.Student.Maps;
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        TextView nav_user = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_name);
+
         navigationView.setNavigationItemSelectedListener(this);
         // Defaulting to the Attendance History fragment
         navigationView.setCheckedItem(R.id.nav_attendancehistory);
@@ -67,12 +70,12 @@ public class MainActivity extends AppCompatActivity
             Menu navMenu = navigationView.getMenu();
             navMenu.findItem(R.id.nav_qrscanner).setVisible(false);
             navMenu.findItem(R.id.nav_map).setVisible(false);
-            //navMenu.findItem(R.id.nav_qrgenerator).setVisible(true);
+            nav_user.setText("Dr. Ben Kenobi");
         } else {
             fm.beginTransaction().replace(R.id.content, new StudentAttendanceHistoryFragment()).commit();
             Menu navMenu = navigationView.getMenu();
             navMenu.findItem(R.id.nav_qrscanner).setVisible(true);
-            //navMenu.findItem(R.id.nav_qrgenerator).setVisible(false);
+            nav_user.setText("John Appleseed");
         }
     }
 
