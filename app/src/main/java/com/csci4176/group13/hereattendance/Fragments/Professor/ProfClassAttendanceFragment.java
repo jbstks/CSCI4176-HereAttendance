@@ -41,14 +41,25 @@ public class ProfClassAttendanceFragment extends Fragment {
         // Hide daysAttended because it should only be seen by a student
         daysAttended = (CardView) view.findViewById(R.id.daysAttended);
         daysAttended.setVisibility(View.GONE);
-
-        // TODO: Sarah, this is what you're looking for. I have hardcoded it for now.
         overallAttendancePercent = (TextView) view.findViewById(R.id.overallAttendancePercent);
-        overallAttendancePercent.setText("75%");
+
 
         if (getActivity().getIntent().getExtras() != null)
             courseCode = getActivity().getIntent().getStringExtra("courseCode");
         getActivity().setTitle(courseCode);
+
+        // approx total course attendance
+        switch (courseCode) {
+            case ("CSCI3110"):
+                overallAttendancePercent.setText(8 * 100 / 12 + "%");
+                break;
+            case ("CSCI3130"):
+                overallAttendancePercent.setText(9 * 100 / 14 + "%");
+                break;
+            case ("CSCI4176"):
+                overallAttendancePercent.setText(8 * 100 / 14 + "%");
+                break;
+        }
 
         RecyclerView rv = view.findViewById(R.id.rv);
         rv.setHasFixedSize(false);
