@@ -55,7 +55,6 @@ public class CurrCoursesRVAdapter extends RecyclerView.Adapter<CurrCoursesRVAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //int position = getAdapterPosition();
                     Intent intent = new Intent(v.getContext(), ClassAttendanceActivity.class);
                     intent.putExtra("courseCode", code.getText());
                     v.getContext().startActivity(intent);

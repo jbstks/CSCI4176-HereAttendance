@@ -52,15 +52,20 @@ public class ClassAttendanceActivity extends AppCompatActivity {
             fm.beginTransaction().replace(R.id.content, new StudentClassAttendanceFragment()).commit();
     }
 
+    /**
+     * Getting data back from the 2nd activity
+     *
+     * @param requestCode the code requested (ie, what you're looking for)
+     * @param resultCode the code sent back
+     * @param data the Intent
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("COURSECODE", "I made it in onActivityResult");
+
         if (requestCode == 1) {
-            Log.d("COURSECODE", "Requestcode == 1");
             if(resultCode == RESULT_OK) {
                 courseCode = data.getStringExtra("courseCode");
-                Log.d("COURSECODE", "courseCode is "+courseCode);
             }
         }
     }

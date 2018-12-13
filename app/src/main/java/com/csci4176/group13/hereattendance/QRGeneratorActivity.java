@@ -66,7 +66,7 @@ public class QRGeneratorActivity extends AppCompatActivity {
             courseCode = getIntent().getStringExtra("courseCode");
             date = getIntent().getStringExtra("date");
         }
-        setTitle("QR Code");
+        setTitle(courseCode+" QR Code");
 
         // Attempt to generate a QR code
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
@@ -121,10 +121,7 @@ public class QRGeneratorActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        //int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        //if (id == R.id.action_share) {
         switch (item.getItemId()) {
             case R.id.action_share:
                 File imagePath = new File(getCacheDir(), "images");
@@ -139,7 +136,6 @@ public class QRGeneratorActivity extends AppCompatActivity {
                     startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.send_to)));
                     return true;
                 }
-        //} else if (id == R.id.home) {
             case android.R.id.home:
                 onBackPressed();
                 return true;
@@ -148,6 +144,9 @@ public class QRGeneratorActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Sending data back on back button press
+     */
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
