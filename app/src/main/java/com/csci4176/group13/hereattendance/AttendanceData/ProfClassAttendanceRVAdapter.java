@@ -80,7 +80,7 @@ public class ProfClassAttendanceRVAdapter extends RecyclerView.Adapter<ProfClass
                     Intent intent = new Intent(v.getContext(), QRGeneratorActivity.class);
                     intent.putExtra("courseCode", courseCode);
                     intent.putExtra("date", date.getText());
-                    intent.putExtra("lectureNum", lectureNum.getText().toString().substring(7));
+                    intent.putExtra("lectureNum", lectureNum.getText().toString().substring(8));
                     ((Activity) v.getContext()).startActivityForResult(intent, 1);
                 }
             });
