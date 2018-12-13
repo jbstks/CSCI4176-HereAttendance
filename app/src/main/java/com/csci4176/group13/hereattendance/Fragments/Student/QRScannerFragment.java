@@ -116,8 +116,6 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                                 release();
                             }
                         });
-
-
                     } else {
                         DatabaseUpdateRef.child(attendanceInfo[0]).child(attendanceInfo[3]).child("date").setValue(attendanceInfo[1] + " " + attendanceInfo[2]);
                         DatabaseUpdateRef.child(attendanceInfo[0]).child(attendanceInfo[3]).child("student").setValue("true").addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -154,12 +152,9 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                                     }
                                 });
                                 release();
-
                             }
                         });
                     }
-
-
                 }
             }
         });

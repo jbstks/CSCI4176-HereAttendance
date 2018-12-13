@@ -71,6 +71,13 @@ public class Maps extends Fragment implements OnMapReadyCallback {
                     Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
+            LatLng CS = new LatLng(44.637444, -63.587224);
+            LatLng LSC = new LatLng(44.636228, -63.594058);
+            LatLng Tupper = new LatLng(44.639354, -63.583841);
+
+            mMap.addMarker(new MarkerOptions().position(CS).title("CSCI 4176").snippet("Mobile Computing"));
+            mMap.addMarker(new MarkerOptions().position(LSC).title("CSCI 3130").snippet("Software Eng"));
+            mMap.addMarker(new MarkerOptions().position(Tupper).title("CSCI3110").snippet("Algorithms"));
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(true);
 
