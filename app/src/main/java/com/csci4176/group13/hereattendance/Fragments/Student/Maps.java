@@ -42,8 +42,6 @@ public class Maps extends Fragment implements OnMapReadyCallback {
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private double longitude;
-    private double latitude;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,7 +77,7 @@ public class Maps extends Fragment implements OnMapReadyCallback {
             }
             LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
             Location userLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            
+
             LatLng CS = new LatLng(44.637444, -63.587224);
             LatLng LSC = new LatLng(44.636228, -63.594058);
             LatLng Tupper = new LatLng(44.639354, -63.583841);
@@ -90,7 +88,7 @@ public class Maps extends Fragment implements OnMapReadyCallback {
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(true);
             LatLng ltlg = new LatLng(userLocation.getLatitude(),userLocation.getLongitude());
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(ltlg, 17);
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(ltlg, 15);
             mMap.animateCamera(cameraUpdate);
 
 
