@@ -79,6 +79,8 @@ public class ProfClassAttendanceRVAdapter extends RecyclerView.Adapter<ProfClass
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(), QRGeneratorActivity.class);
                     intent.putExtra("courseCode", courseCode);
+                    intent.putExtra("date", date.getText());
+                    intent.putExtra("lectureNum", lectureNum.getText().toString().substring(7));
                     ((Activity) v.getContext()).startActivityForResult(intent, 1);
                 }
             });

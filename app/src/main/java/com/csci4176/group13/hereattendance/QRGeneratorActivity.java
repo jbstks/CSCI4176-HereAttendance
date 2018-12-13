@@ -41,6 +41,7 @@ public class QRGeneratorActivity extends AppCompatActivity {
     ImageView imgQRCode;
     String courseCode;
     String date;
+    String lectureNum;
     Bitmap bitmap;
 
     /**
@@ -65,13 +66,14 @@ public class QRGeneratorActivity extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
             courseCode = getIntent().getStringExtra("courseCode");
             date = getIntent().getStringExtra("date");
+            lectureNum = getIntent().getStringExtra("lectureNum");
         }
         setTitle(courseCode+" QR Code");
 
         // Attempt to generate a QR code
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try{
-            String QRText = courseCode+"_"+date;
+            String QRText = courseCode+" "+date+" "+lectureNum;
             Toast.makeText(getApplicationContext(), QRText, Toast.LENGTH_SHORT).show();
 
             // Generating QR Code For QRText
