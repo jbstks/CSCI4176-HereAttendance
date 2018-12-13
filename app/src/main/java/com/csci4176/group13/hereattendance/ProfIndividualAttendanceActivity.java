@@ -1,5 +1,6 @@
 package com.csci4176.group13.hereattendance;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -47,7 +49,7 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
     int numStudents = 12;
 
     // this is the number that will be displayed BEFORE the database pull changes the text
-    double attendedPercent=0;
+    double attendedPercent = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,7 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
         // Getting the intent extras
         if (getIntent().getExtras() != null) {
             lectureNum = getIntent().getStringExtra("lectureNum");
-            courseCode = getIntent().getStringExtra("CourseCode");
+            courseCode = getIntent().getStringExtra("courseCode");
         }
         setTitle(lectureNum);
 
@@ -88,7 +90,7 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
                             if (courseLecture.getKey().equals("" + lectureNum.charAt(8)))
                                 if (courseLecture.hasChild("student")) {
 
-                                // add student to arraylist
+                                    // add student to arraylist
                                     studentAttendance.add(new IndividualStudentAttendance("Appleseed, John", true));
 
                                     // adjust percent attendance to reflect and additional student being there
@@ -100,7 +102,6 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
                                     attendedPercent=(attendedPercent*numStudents)/(numStudents+1);
                                     percentage.setText((int)attendedPercent+"%");
                                 }
-
                         }
                     }
                     adapter.notifyDataSetChanged();
@@ -112,6 +113,7 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
             }
         });
 
+        // In a normal setting this would not be hardcoded and would be pulled from the database
         // This just switches up who attended and who didn't. It adds variety rather than
         // showing that 65% attended during every lecture, etc
         boolean attended = false;
@@ -137,15 +139,15 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
         }
 
         if (courseCode.equals("CSCI3110")) {
-
             // Again, each course has different students
             // this if/else calculates the attendance percent based on the boolean value we just set
             numStudents = 12;
-            if (!attended) {
-                attendedPercent=(9.0 * 100.0 / numStudents);
-            } else {
-                attendedPercent=(2.0 * 100.0 / numStudents);
-            }
+
+            if (!attended)
+                attendedPercent = (9.0 * 100.0 / numStudents);
+            else
+                attendedPercent = (2.0 * 100.0 / numStudents);
+
             studentAttendance.add(new IndividualStudentAttendance("Abarbanel, Sarah", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Balboa, Porky", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Bistekos, Joanna", !attended));
@@ -159,13 +161,12 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
             studentAttendance.add(new IndividualStudentAttendance("Fidel, Vo", !attended));
         }
         if (courseCode.equals("CSCI3130")) {
-            numStudents=14;
+            numStudents = 14;
 
-            if (attended) {
-                attendedPercent=(3.0 * 100.0 / numStudents);
-            } else {
-                attendedPercent=(10 * 100 / numStudents);
-            }
+            if (attended)
+                attendedPercent = (3.0 * 100.0 / numStudents);
+            else
+                attendedPercent = (10.0 * 100.0 / numStudents);
 
             studentAttendance.add(new IndividualStudentAttendance("Bert, Beaver", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Else, Culwell", !attended));
@@ -183,13 +184,12 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
         }
 
         if (courseCode.equals("CSCI4176")) {
-            numStudents=14;
+            numStudents = 14;
 
-            if (attended) {
-                attendedPercent=(3.0 * 100.0 / numStudents);
-            } else {
-                attendedPercent=(10 * 100 / numStudents);
-            }
+            if (attended)
+                attendedPercent = (3.0 * 100.0 / numStudents);
+            else
+                attendedPercent = (10.0 * 100.0 / numStudents);
 
             studentAttendance.add(new IndividualStudentAttendance("Mi, Welle", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Berenice, Augustus", !attended));
@@ -208,5 +208,35 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
         }
         percentage.setText((int)attendedPercent+"%");
         rv.setAdapter(adapter);
+    }
+
+    /**
+     * Sending data back on back button press
+     */
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra("courseCode", courseCode);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    /**
+     * Handle action bar item clicks here. The action bar will automatically handle clicks on
+     * the Home/Up button, so long as you specify a parent activity in AndroidManifest.xml.
+     *
+     * @param item
+     * @return MenuItem selected
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

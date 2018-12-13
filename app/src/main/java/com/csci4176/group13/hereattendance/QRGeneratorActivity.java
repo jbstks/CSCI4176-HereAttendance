@@ -66,7 +66,7 @@ public class QRGeneratorActivity extends AppCompatActivity {
             courseCode = getIntent().getStringExtra("courseCode");
             date = getIntent().getStringExtra("date");
         }
-        setTitle(courseCode+" QR Code");
+        setTitle("QR Code");
 
         // Attempt to generate a QR code
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
@@ -121,24 +121,38 @@ public class QRGeneratorActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+        //int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_share) {
-            File imagePath = new File(getCacheDir(), "images");
-            File generatedQR = new File(imagePath, "qrcode.png");
-            Uri imageURI = FileProvider.getUriForFile(this, "com.csci4176.group13.hereattendance", generatedQR);
+        //if (id == R.id.action_share) {
+        switch (item.getItemId()) {
+            case R.id.action_share:
+                File imagePath = new File(getCacheDir(), "images");
+                File generatedQR = new File(imagePath, "qrcode.png");
+                Uri imageURI = FileProvider.getUriForFile(this, "com.csci4176.group13.hereattendance", generatedQR);
 
-            if (imageURI != null) {
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_STREAM, imageURI);
-                shareIntent.setType("image/png");
-                startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.send_to)));
+                if (imageURI != null) {
+                    Intent shareIntent = new Intent();
+                    shareIntent.setAction(Intent.ACTION_SEND);
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, imageURI);
+                    shareIntent.setType("image/png");
+                    startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.send_to)));
+                    return true;
+                }
+        //} else if (id == R.id.home) {
+            case android.R.id.home:
+                onBackPressed();
                 return true;
-            }
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra("courseCode", courseCode);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }

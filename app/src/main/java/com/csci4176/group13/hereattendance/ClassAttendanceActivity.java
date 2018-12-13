@@ -1,19 +1,27 @@
 package com.csci4176.group13.hereattendance;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.MenuItem;
 
 import com.csci4176.group13.hereattendance.Fragments.Professor.ProfClassAttendanceFragment;
 import com.csci4176.group13.hereattendance.Fragments.Student.StudentClassAttendanceFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.File;
+
 public class ClassAttendanceActivity extends AppCompatActivity {
 
     FirebaseUser signedInUser = FirebaseAuth.getInstance().getCurrentUser();
     String user;
+    public String courseCode;
 
     /**
      * Things to be done on activity creation
@@ -34,7 +42,6 @@ public class ClassAttendanceActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_round_close_24px);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FragmentManager fm = getSupportFragmentManager();
@@ -45,4 +52,16 @@ public class ClassAttendanceActivity extends AppCompatActivity {
             fm.beginTransaction().replace(R.id.content, new StudentClassAttendanceFragment()).commit();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("COURSECODE", "I made it in onActivityResult");
+        if (requestCode == 1) {
+            Log.d("COURSECODE", "Requestcode == 1");
+            if(resultCode == RESULT_OK) {
+                courseCode = data.getStringExtra("courseCode");
+                Log.d("COURSECODE", "courseCode is "+courseCode);
+            }
+        }
+    }
 }

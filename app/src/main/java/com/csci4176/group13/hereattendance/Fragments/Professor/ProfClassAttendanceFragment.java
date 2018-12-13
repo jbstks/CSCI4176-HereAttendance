@@ -10,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.csci4176.group13.hereattendance.AttendanceData.ClassAttendance;
 import com.csci4176.group13.hereattendance.AttendanceData.ProfClassAttendanceRVAdapter;
 import com.csci4176.group13.hereattendance.AttendanceData.LectureAttendance;
+import com.csci4176.group13.hereattendance.ClassAttendanceActivity;
 import com.csci4176.group13.hereattendance.R;
 
 import java.util.ArrayList;
@@ -43,11 +45,12 @@ public class ProfClassAttendanceFragment extends Fragment {
         daysAttended.setVisibility(View.GONE);
         overallAttendancePercent = (TextView) view.findViewById(R.id.overallAttendancePercent);
 
-
+        ClassAttendanceActivity activity = (ClassAttendanceActivity) getActivity();
         if (getActivity().getIntent().getExtras() != null)
             courseCode = getActivity().getIntent().getStringExtra("courseCode");
+        else
+            courseCode = activity.courseCode;
         getActivity().setTitle(courseCode);
-
 
         RecyclerView rv = view.findViewById(R.id.rv);
         rv.setHasFixedSize(false);
@@ -58,14 +61,14 @@ public class ProfClassAttendanceFragment extends Fragment {
         List<LectureAttendance> lectureAttendance;
         lectureAttendance = new ArrayList<>();
         // approx total course attendance
-        switch (courseCode) {
-            case ("CSCI3110"):
+        /*switch (courseCode) {
+            case ("CSCI3110"):*/
                 overallAttendancePercent.setText(8 * 100 / 12 + "%");
                 lectureAttendance.add(new LectureAttendance(1, "October 8", 75));
                 lectureAttendance.add(new LectureAttendance(2, "October 10", 16));
                 lectureAttendance.add(new LectureAttendance(3, "October 12", 75));
                 lectureAttendance.add(new LectureAttendance(4, "October 18", 0));
-                break;
+                /*break;
             case ("CSCI3130"):
                 overallAttendancePercent.setText(9 * 100 / 14 + "%");
                 lectureAttendance.add(new LectureAttendance(1, "October 9", 71));
@@ -80,7 +83,7 @@ public class ProfClassAttendanceFragment extends Fragment {
                 lectureAttendance.add(new LectureAttendance(3, "October 12", 71));
                 lectureAttendance.add(new LectureAttendance(4, "October 17", 0));
                 break;
-        }
+        }*/
 
         ProfClassAttendanceRVAdapter adapter = new ProfClassAttendanceRVAdapter(lectureAttendance, courseCode);
         rv.setAdapter(adapter);

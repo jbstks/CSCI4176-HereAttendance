@@ -1,5 +1,6 @@
 package com.csci4176.group13.hereattendance.AttendanceData;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -58,17 +59,17 @@ public class ProfClassAttendanceRVAdapter extends RecyclerView.Adapter<ProfClass
             overallAttendancePercent = (TextView) view.findViewById(R.id.overallAttendancePercent);
 
             // this is an approximate number for what the total course attendance would be
-            switch (courseCode) {
-                case ("CSCI3110"):
+            /*switch (courseCode) {
+                case ("CSCI3110"):*/
                     overallAttendancePercent.setText(8 * 100 / 12 + "%");
-                    break;
+                    /*break;
                 case ("CSCI3130"):
                     overallAttendancePercent.setText(9 * 100 / 14 + "%");
                     break;
                 case ("CSCI4176"):
                     overallAttendancePercent.setText(8 * 100 / 14 + "%");
                     break;
-            }
+            }*/
 
             date = (TextView) view.findViewById(R.id.date);
             qrGenBtn = (CardView) view.findViewById(R.id.qrGenBtn);
@@ -79,7 +80,8 @@ public class ProfClassAttendanceRVAdapter extends RecyclerView.Adapter<ProfClass
                     Intent intent = new Intent(v.getContext(), QRGeneratorActivity.class);
                     intent.putExtra("courseCode", courseCode);
                     intent.putExtra("date", date.getText());
-                    v.getContext().startActivity(intent);
+                    //v.getContext().startActivity(intent);
+                    ((Activity) v.getContext()).startActivityForResult(intent, 1);
                 }
             });
 
@@ -90,8 +92,9 @@ public class ProfClassAttendanceRVAdapter extends RecyclerView.Adapter<ProfClass
                     intent.putExtra("lectureNum", lectureNum.getText());
                     // we have to pass along the course code, because we have different students for different courses
                     // so we have to identify what course it is
-                    intent.putExtra("CourseCode", courseCode);
-                    v.getContext().startActivity(intent);
+                    intent.putExtra("courseCode", courseCode);
+                    //v.getContext().startActivity(intent);
+                    ((Activity) v.getContext()).startActivityForResult(intent, 1);
                 }
             });
         }
