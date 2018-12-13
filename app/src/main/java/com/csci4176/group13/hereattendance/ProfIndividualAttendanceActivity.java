@@ -64,14 +64,12 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
         }
         setTitle(lectureNum);
 
-
         // Setting up the RecyclerView (list)
         RecyclerView rv = findViewById(R.id.rv);
         rv.setHasFixedSize(false);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
-
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -84,12 +82,12 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
                                     studentAttendance.add(new IndividualStudentAttendance("Appleseed, John", true));
                                     studentAttended = true;
                                     attendedPercent=(attendedPercent*numStudents + 1)/(numStudents+1);
-                                    percentage.setText((int)attendedPercent+" %");
+                                    percentage.setText((int)attendedPercent+"%");
 
                                 } else {
                                     studentAttendance.add(new IndividualStudentAttendance("Appleseed, John", false));
                                     attendedPercent=(attendedPercent*numStudents)/(numStudents+1);
-                                    percentage.setText((int)attendedPercent+" %");
+                                    percentage.setText((int)attendedPercent+"%");
                                 }
 
                         }
@@ -102,6 +100,7 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+
         // TODO pull database data to change attendance data, also need a way to set the attendance outside of the setting the adapter values, I'll just spoof it
         boolean attended = false;
         switch (lectureNum) {
@@ -126,9 +125,10 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
         }
 
         if (courseCode.equals("CSCI3110")) {
-numStudents=12;
+            numStudents = 12;
+
             if (!attended) {
-                    attendedPercent=(9.0 * 100.0 / 12.0);
+                attendedPercent=(9.0 * 100.0 / 12.0);
             } else {
                 attendedPercent=(2.0 * 100.0 / 12.0);
             }
@@ -140,21 +140,16 @@ numStudents=12;
             studentAttendance.add(new IndividualStudentAttendance("Negahban, Abdullah", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Shah, Dhruvi", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Shah, Sunitkumar", attended));
-            studentAttendance.add(new IndividualStudentAttendance("Conchita,Truelove", !attended));
-            studentAttendance.add(new IndividualStudentAttendance("Lorelei,Cleavenger", !attended));
-            studentAttendance.add(new IndividualStudentAttendance("Fidel,Vo", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Conchita, Truelove", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Lorelei, Cleavenger", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Fidel, Vo", !attended));
         }
         if (courseCode.equals("CSCI3130")) {
             numStudents=14;
 
             if (attended) {
-
-
-
                 attendedPercent=(3.0 * 100.0 / 14.0);
-
             } else {
-
                 attendedPercent=(10 * 100 / 14);
             }
 
@@ -172,6 +167,7 @@ numStudents=12;
             studentAttendance.add(new IndividualStudentAttendance("Darcie, Horney", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Eveline, Wiemer", !attended));
         }
+
         if (courseCode.equals("CSCI4176")) {
             numStudents=14;
 
@@ -196,7 +192,7 @@ numStudents=12;
             studentAttendance.add(new IndividualStudentAttendance("Vi, Hoelscher", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Chia, Luera", !attended));
         }
-        percentage.setText((int)attendedPercent+" %");
+        percentage.setText((int)attendedPercent+"%");
         rv.setAdapter(adapter);
     }
 }

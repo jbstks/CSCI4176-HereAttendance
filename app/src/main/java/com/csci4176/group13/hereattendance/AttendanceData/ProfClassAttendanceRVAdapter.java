@@ -56,7 +56,11 @@ public class ProfClassAttendanceRVAdapter extends RecyclerView.Adapter<ProfClass
             listItem = view.findViewById(R.id.listItem);
             lectureNum = (TextView) view.findViewById(R.id.lectureNum);
             overallAttendancePercent = (TextView) view.findViewById(R.id.overallAttendancePercent);
-            //TODO: Jo, for some reason this isn't setting the text. If you can figure it out, it will make this look a little more convincing
+            /* Jo, for some reason this isn't setting the text. If you can figure it out, it will make this look a little more convincing
+               TODO Sarah, this code works fine.
+               It looks like you're trying to set the text for a different view, that being ProfClassAttendanceFragment.java
+               I put a to/do there as well so you can find it.
+             */
             switch (courseCode) {
                 case ("CSCI3110"):
                     overallAttendancePercent.setText(8 * 100 / 12 + "%");
