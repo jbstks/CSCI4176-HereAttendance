@@ -52,7 +52,6 @@ public class Maps extends Fragment implements OnMapReadyCallback {
         return view;
     }
 
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -83,65 +82,61 @@ public class Maps extends Fragment implements OnMapReadyCallback {
             LatLng Tupper = new LatLng(44.639354, -63.583841);
 
             mMap.addMarker(new MarkerOptions().position(CS).title("CSCI 4176").snippet("Mobile Computing"));
-            mMap.addMarker(new MarkerOptions().position(LSC).title("CSCI 3130").snippet("Software Eng"));
+            mMap.addMarker(new MarkerOptions().position(LSC).title("CSCI 3130").snippet("Software Engineering"));
             mMap.addMarker(new MarkerOptions().position(Tupper).title("CSCI3110").snippet("Algorithms"));
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(true);
-            if(userLocation != null) {
+            if (userLocation != null) {
                 LatLng ltlg = new LatLng(userLocation.getLatitude(), userLocation.getLongitude());
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(ltlg, 15);
                 mMap.animateCamera(cameraUpdate);
             }
-
-
-
-
         }
     }
 
-    private void getDeviceLocation(){
+    private void getDeviceLocation() {
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
 
-        try{
-            if(mLocationPermissionsGranted){
+        try {
+            if (mLocationPermissionsGranted) {
 
                 final Task location = mFusedLocationProviderClient.getLastLocation();
                 location.addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Location currentLocation = (Location) task.getResult();
-                        }else{
+                        } else {
                             Toast.makeText(getContext(), "ERROR LOCATION", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
             }
-        }catch (SecurityException e){ }
+        } catch (SecurityException e) { }
     }
 
-    private void initMap(){
+    private void initMap() {
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
                 .findFragmentById(R.id.maps);
         mapFragment.getMapAsync(this);
     }
 
-    private void getLocationPermission(){
+    private void getLocationPermission() {
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
 
-        if(ContextCompat.checkSelfPermission(getContext(),
-                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            if(ContextCompat.checkSelfPermission(getContext(),
-                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(getContext(),
+                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(getContext(),
+                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 mLocationPermissionsGranted = true;
                 initMap();
-            }else{
+            } else {
                 ActivityCompat.requestPermissions(getActivity(),
                         permissions,
                         LOCATION_PERMISSION_REQUEST_CODE);
             }
-        }else{
+        } else {
             ActivityCompat.requestPermissions(getActivity(),
                     permissions,
                     LOCATION_PERMISSION_REQUEST_CODE);
@@ -152,11 +147,11 @@ public class Maps extends Fragment implements OnMapReadyCallback {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         mLocationPermissionsGranted = false;
 
-        switch(requestCode){
-            case LOCATION_PERMISSION_REQUEST_CODE:{
-                if(grantResults.length > 0){
-                    for(int i = 0; i < grantResults.length; i++){
-                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
+        switch (requestCode) {
+            case LOCATION_PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0) {
+                    for (int i = 0; i < grantResults.length; i++) {
+                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                             mLocationPermissionsGranted = false;
                             return;
                         }
@@ -165,7 +160,6 @@ public class Maps extends Fragment implements OnMapReadyCallback {
                     //initialize our map
                     initMap();
                 }
-            }
         }
     }
 
