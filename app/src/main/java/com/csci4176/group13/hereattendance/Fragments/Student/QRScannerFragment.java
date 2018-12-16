@@ -25,6 +25,7 @@ import com.csci4176.group13.hereattendance.MainActivity;
 import com.csci4176.group13.hereattendance.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.vision.CameraSource;
@@ -48,6 +49,14 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
     BarcodeDetector qrDetect;
     int cameraPermission = 007;
     int validFormat = 0; // 0 for valid, 1 for not able to update, 2 for invalid
+    double distance = 0;
+    double uLat = 0;
+    double uLong = 0;
+    String building;
+    LatLng CS = new LatLng(44.637444, -63.587224);
+    LatLng LSC = new LatLng(44.636228, -63.594058);
+    LatLng Tupper = new LatLng(44.639354, -63.583841);
+    double r = 1;
 
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -84,6 +93,8 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                     LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     Location location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
                     Toast.makeText(getContext(), "loc"+location,Toast.LENGTH_LONG).show();
+                    uLat = location.getLatitude();
+                    uLong = location.getLongitude();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -128,11 +139,33 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                             }
                         });
                     } else {
-                        DatabaseUpdateRef.child(attendanceInfo[0]).child(attendanceInfo[3]).child("date").setValue(attendanceInfo[1] + " " + attendanceInfo[2]);
+                        Log.d("COURSEABDULLAH","Course name"+codes.valueAt(0).displayValue.substring(0,8));
+                        if (codes.valueAt(0).displayValue.substring(0,8).equals("CSCI4176")) {
+                            building = "CS";
+                            distance = Math.acos((Math.sin(Math.toRadians(uLat))*Math.sin(Math.toRadians(CS.latitude)))+
+                                    (Math.cos(Math.toRadians(uLat))*Math.cos(Math.toRadians(CS.latitude))*
+                                            Math.cos(Math.toRadians(uLong)-Math.toRadians(CS.longitude))));
+                            Log.d("IF1", "if1"+distance);
+                        } else if (codes.valueAt(0).displayValue.substring(0,8).equals("CSCI3130")) {
+                            building = "LSC";
+                            distance = Math.acos((Math.sin(Math.toRadians(uLat))*Math.sin(Math.toRadians(LSC.latitude)))+
+                                    (Math.cos(Math.toRadians(uLat))*Math.cos(Math.toRadians(LSC.latitude))*
+                                            Math.cos(Math.toRadians(uLong)-Math.toRadians(LSC.longitude))));
+                            Log.d("IF2", "if1"+distance);
+                        } else if (codes.valueAt(0).displayValue.substring(0,8).equals("CSCI3110")) {
+                            building = "Tupper";
+                            distance = Math.acos((Math.sin(Math.toRadians(uLat))*Math.sin(Math.toRadians(Tupper.latitude)))+
+                                    (Math.cos(Math.toRadians(uLat))*Math.cos(Math.toRadians(Tupper.latitude))*
+                                            Math.cos(Math.toRadians(uLong)-Math.toRadians(Tupper.longitude))))*6371;
+                            Log.d("IF3", "if1"+distance);
+                        }
+
+                        if (distance <= 0.200){
+                            DatabaseUpdateRef.child(attendanceInfo[0]).child(attendanceInfo[3]).child("date").setValue(attendanceInfo[1] + " " + attendanceInfo[2]);
                         DatabaseUpdateRef.child(attendanceInfo[0]).child(attendanceInfo[3]).child("student").setValue("true").addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-
+                                Toast.makeText(getContext(), "distance"+distance, Toast.LENGTH_LONG).show();
                                 validFormat = 0;
                                 qrCodeView.post(new Runnable() {
                                     @Override
@@ -166,6 +199,22 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                             }
                         });
                     }
+                    else{
+                            validFormat = 3;
+                            qrCodeView.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Vibrator vibrate = (Vibrator) getActivity().getApplicationContext()
+                                            .getSystemService(Context.VIBRATOR_SERVICE);
+                                    vibrate.vibrate(100);
+                                    showAlertDialogButtonClicked(codes.valueAt(0).displayValue, 3);
+                                    release();
+
+                                }
+                            });
+                            //release();
+                        }
+                    }
                 }
             }
         });
@@ -189,6 +238,10 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
             case 2:
                 builder.setTitle("Scan Failed");
                 builder.setMessage("The QR code scanned is improperly formatted");
+                break;
+            case 3:
+                builder.setTitle("Scan Failed");
+                builder.setMessage("Please scan the QR code from within the lecture room");
                 break;
         }
         // backend note that the course was scanned
