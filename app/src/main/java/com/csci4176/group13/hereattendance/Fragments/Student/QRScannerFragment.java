@@ -92,7 +92,7 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                     camera.start(qrCodeView.getHolder());
                     LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     Location location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-                    Toast.makeText(getContext(), "loc"+location,Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getContext(), "loc"+location,Toast.LENGTH_LONG).show();
                     uLat = location.getLatitude();
                     uLong = location.getLongitude();
                 } catch (IOException e) {
@@ -145,19 +145,19 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                             distance = Math.acos((Math.sin(Math.toRadians(uLat))*Math.sin(Math.toRadians(CS.latitude)))+
                                     (Math.cos(Math.toRadians(uLat))*Math.cos(Math.toRadians(CS.latitude))*
                                             Math.cos(Math.toRadians(uLong)-Math.toRadians(CS.longitude))));
-                            Log.d("IF1", "if1"+distance);
+                            //Log.d("IF1", "if1"+distance);
                         } else if (codes.valueAt(0).displayValue.substring(0,8).equals("CSCI3130")) {
                             building = "LSC";
                             distance = Math.acos((Math.sin(Math.toRadians(uLat))*Math.sin(Math.toRadians(LSC.latitude)))+
                                     (Math.cos(Math.toRadians(uLat))*Math.cos(Math.toRadians(LSC.latitude))*
                                             Math.cos(Math.toRadians(uLong)-Math.toRadians(LSC.longitude))));
-                            Log.d("IF2", "if1"+distance);
+                            //Log.d("IF2", "if1"+distance);
                         } else if (codes.valueAt(0).displayValue.substring(0,8).equals("CSCI3110")) {
                             building = "Tupper";
                             distance = Math.acos((Math.sin(Math.toRadians(uLat))*Math.sin(Math.toRadians(Tupper.latitude)))+
                                     (Math.cos(Math.toRadians(uLat))*Math.cos(Math.toRadians(Tupper.latitude))*
                                             Math.cos(Math.toRadians(uLong)-Math.toRadians(Tupper.longitude))))*6371;
-                            Log.d("IF3", "if1"+distance);
+                            //Log.d("IF3", "if1"+distance);
                         }
 
                         if (distance <= 0.200){
@@ -165,7 +165,7 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                         DatabaseUpdateRef.child(attendanceInfo[0]).child(attendanceInfo[3]).child("student").setValue("true").addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(getContext(), "distance"+distance, Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getContext(), "distance"+distance, Toast.LENGTH_LONG).show();
                                 validFormat = 0;
                                 qrCodeView.post(new Runnable() {
                                     @Override
