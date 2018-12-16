@@ -76,7 +76,7 @@ public class Maps extends Fragment implements OnMapReadyCallback {
                 return;
             }
             LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-            Location userLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            Location userLocation = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
 
             LatLng CS = new LatLng(44.637444, -63.587224);
             LatLng LSC = new LatLng(44.636228, -63.594058);
@@ -87,9 +87,11 @@ public class Maps extends Fragment implements OnMapReadyCallback {
             mMap.addMarker(new MarkerOptions().position(Tupper).title("CSCI3110").snippet("Algorithms"));
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(true);
-            LatLng ltlg = new LatLng(userLocation.getLatitude(),userLocation.getLongitude());
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(ltlg, 15);
-            mMap.animateCamera(cameraUpdate);
+            if(userLocation != null) {
+                LatLng ltlg = new LatLng(userLocation.getLatitude(), userLocation.getLongitude());
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(ltlg, 15);
+                mMap.animateCamera(cameraUpdate);
+            }
 
 
 

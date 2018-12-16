@@ -1,9 +1,12 @@
 package com.csci4176.group13.hereattendance.Fragments.Student;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
@@ -16,9 +19,12 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.csci4176.group13.hereattendance.MainActivity;
 import com.csci4176.group13.hereattendance.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.vision.CameraSource;
@@ -29,6 +35,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
+
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 /**
  * Fragment for the QR camera scanner
@@ -73,6 +81,9 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                 }
                 try {
                     camera.start(qrCodeView.getHolder());
+                    LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+                    Location location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+                    Toast.makeText(getContext(), "loc"+location,Toast.LENGTH_LONG).show();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -202,5 +213,9 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
         AlertDialog dialog = builder.create();
         // show the alert dialog
         dialog.show();
+    }
+
+    private void requestPermission(){
+        ActivityCompat.requestPermissions(getActivity(), new String[] {ACCESS_FINE_LOCATION}, 1);
     }
 }
