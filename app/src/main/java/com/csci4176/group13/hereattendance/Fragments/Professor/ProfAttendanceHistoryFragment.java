@@ -43,7 +43,7 @@ public class ProfAttendanceHistoryFragment extends Fragment {
         currentCourses = new ArrayList<>();
 
         // these magic numbers are my best estimate at course attendance.
-        currentCourses.add(new CurrentCourse("CSCI3130", "Software Engineering", 9 * 100 / 14));
+        //currentCourses.add(new CurrentCourse("CSCI3130", "Software Engineering", 9 * 100 / 14));
         currentCourses.add(new CurrentCourse("CSCI3130", "Software Engineering", 9 * 100 / 14));
         currentCourses.add(new CurrentCourse("CSCI4176", "Mobile Computing", 8 * 100 / 14));
         currentCourses.add(new CurrentCourse("CSCI3110", "Algorithms", 8 * 100 / 12));

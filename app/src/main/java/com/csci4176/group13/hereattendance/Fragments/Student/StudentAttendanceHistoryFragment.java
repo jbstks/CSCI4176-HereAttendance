@@ -54,7 +54,7 @@ public class StudentAttendanceHistoryFragment extends Fragment {
         final List<CurrentCourse> currentCourses;
         currentCourses = new ArrayList<>();
 
-        currentCourses.add(new CurrentCourse("CSCI3130", "Software Engineering", -1));
+        //currentCourses.add(new CurrentCourse("CSCI3130", "Software Engineering", -1));
         currentCourses.add(new CurrentCourse("CSCI3110", "Algorithms", -1));
         currentCourses.add(new CurrentCourse("CSCI3130", "Software Engineering", -1));
         currentCourses.add(new CurrentCourse("CSCI4176", "Mobile Computing", -1));
@@ -69,7 +69,7 @@ public class StudentAttendanceHistoryFragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     int there = 0;
                     int dayspast = 0;
-                    lectnum++;
+
                     for (DataSnapshot courseLecture : snapshot.getChildren()) {
                         dayspast++;
                         if (courseLecture.hasChild("student")) {
@@ -77,8 +77,11 @@ public class StudentAttendanceHistoryFragment extends Fragment {
                         }
                     }
                     Log.d("courseCode", "percentage Attendance" + (there * 100 / dayspast));
+                    // make sure we don't go out of bounds
+                    if (lectnum >= currentCourses.size()) break;
                     currentCourses.get(lectnum).setAttendancePercent(there * 100 / dayspast);
                     adapter.notifyDataSetChanged();
+                    lectnum++;
                 }
             }
 
