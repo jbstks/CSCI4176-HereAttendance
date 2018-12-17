@@ -5,27 +5,43 @@
     android:id="@+id/listItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:paddingStart="16dp"
-    android:paddingTop="10dp"
     android:paddingEnd="16dp"
-    tools:context=".ProfIndividualAttendanceActivity"
-    android:orientation="horizontal">
+    tools:context=".ProfIndividualAttendanceActivity">
 
-    <TextView
-        android:id="@+id/studentName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:lineSpacingExtra="0.15sp"
-        android:text="@string/student_name"
-        android:textColor="@android:color/black"
-        android:textSize="16sp" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/isAttended"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:drawableEnd="@drawable/ic_round_done_24px"
-        android:padding="8dp" />
+        <TextView
+            android:id="@+id/studentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:lineSpacingExtra="0.15sp"
+            android:text="@string/student_name"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/isAttended"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:drawableEnd="@drawable/ic_round_done_24px"
+            android:padding="8dp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
 
 </LinearLayout>

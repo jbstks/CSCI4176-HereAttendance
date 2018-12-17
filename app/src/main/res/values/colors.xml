@@ -5,4 +5,5 @@
     <color name="colorAccent">#7986CB</color>
     <color name="navHeader"></color>
     <color name="iconColor">#FFFFFF</color>
+    <color name="divider">#e4e4e4</color>
 </resources>

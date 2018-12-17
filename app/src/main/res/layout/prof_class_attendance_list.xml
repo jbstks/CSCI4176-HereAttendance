@@ -5,63 +5,79 @@
     android:id="@+id/listItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:paddingStart="16dp"
-    android:paddingTop="10dp"
     android:paddingEnd="16dp"
-    tools:context=".Fragments.Student.StudentAttendanceHistoryFragment"
-    android:orientation="horizontal">
+    tools:context=".Fragments.Student.StudentAttendanceHistoryFragment">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        tools:context=".Fragments.Student.StudentAttendanceHistoryFragment">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/lectureNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="0.15sp"
+                android:text="@string/lecture_num_placeholder"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="0.25sp"
+                android:text="@string/lecture_date_placeholder" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/lectureNum"
+            android:id="@+id/overallAttendancePercent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:lineSpacingExtra="0.15sp"
-            android:text="@string/lecture_num_placeholder"
+            android:layout_gravity="center_vertical"
+            android:lineSpacingExtra="0.4sp"
+            android:text="@string/attendance_percent_placeholder"
             android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:textSize="12sp"
+            android:visibility="visible" />
 
-        <TextView
-            android:id="@+id/date"
+        <android.support.v7.widget.CardView
+            android:id="@+id/qrGenBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:lineSpacingExtra="0.25sp"
-            android:text="@string/lecture_date_placeholder" />
+            android:layout_gravity="center_vertical"
+            android:backgroundTint="@color/colorPrimary"
+            android:visibility="visible"
+            app:cardCornerRadius="3dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_crop_free_24px"
+                android:drawableTint="@android:color/white"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:padding="8dp"
+                android:textColor="@android:color/white" />
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/overallAttendancePercent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:lineSpacingExtra="0.4sp"
-        android:text="@string/attendance_percent_placeholder"
-        android:textColor="@android:color/black"
-        android:textSize="12sp"
-        android:visibility="visible" />
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/qrGenBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="3dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:visibility="visible"
-        app:cardCornerRadius="3dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_round_crop_free_24px"
-            android:drawableTint="@android:color/white"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:padding="8dp"
-            android:textColor="@android:color/white" />
-    </android.support.v7.widget.CardView>
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
 
 </LinearLayout>

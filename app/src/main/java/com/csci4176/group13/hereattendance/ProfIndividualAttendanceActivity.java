@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -91,14 +92,14 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
                                 if (courseLecture.hasChild("student")) {
 
                                     // add student to arraylist
-                                    studentAttendance.add(new IndividualStudentAttendance("Appleseed, John", true));
+                                    studentAttendance.add(1, new IndividualStudentAttendance("Appleseed, John", true));
 
                                     // adjust percent attendance to reflect and additional student being there
                                     attendedPercent=(attendedPercent*numStudents + 1)/(numStudents+1);
                                     percentage.setText((int)attendedPercent+"%");
 
                                 } else {
-                                    studentAttendance.add(new IndividualStudentAttendance("Appleseed, John", false));
+                                    studentAttendance.add(1, new IndividualStudentAttendance("Appleseed, John", false));
                                     attendedPercent=(attendedPercent*numStudents)/(numStudents+1);
                                     percentage.setText((int)attendedPercent+"%");
                                 }
@@ -152,13 +153,13 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
             studentAttendance.add(new IndividualStudentAttendance("Balboa, Porky", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Bistekos, Joanna", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Campbell, Susan", attended));
+            studentAttendance.add(new IndividualStudentAttendance("Conchita, Truelove", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Daniels, Daniel", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Fidel, Vo", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Lorelei, Cleavenger", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Negahban, Abdullah", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Shah, Dhruvi", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Shah, Sunitkumar", attended));
-            studentAttendance.add(new IndividualStudentAttendance("Conchita, Truelove", !attended));
-            studentAttendance.add(new IndividualStudentAttendance("Lorelei, Cleavenger", !attended));
-            studentAttendance.add(new IndividualStudentAttendance("Fidel, Vo", !attended));
         }
         if (courseCode.equals("CSCI3130")) {
             numStudents = 14;
@@ -168,21 +169,20 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
             else
                 attendedPercent = (10.0 * 100.0 / numStudents);
 
-            studentAttendance.add(new IndividualStudentAttendance("Bert, Beaver", !attended));
-            studentAttendance.add(new IndividualStudentAttendance("Else, Culwell", !attended));
-            studentAttendance.add(new IndividualStudentAttendance("Carina, Speece", attended));
-            studentAttendance.add(new IndividualStudentAttendance("Ashton, Weitz", !attended));
-            studentAttendance.add(new IndividualStudentAttendance("Aleshia, Yerkes", attended));
-            studentAttendance.add(new IndividualStudentAttendance("Sara, Kosloski", !attended));
-            studentAttendance.add(new IndividualStudentAttendance("Fairy, Tobin", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Adolfo, Meals", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Ashton, Weitz", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Bert, Beaver", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Beshia, Yerkes", attended));
             studentAttendance.add(new IndividualStudentAttendance("Camille, Ponder", !attended));
-            studentAttendance.add(new IndividualStudentAttendance("Nick, Schloss", attended));
+            studentAttendance.add(new IndividualStudentAttendance("Carina, Speece", attended));
             studentAttendance.add(new IndividualStudentAttendance("Conception, Wiser", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Darcie, Horney", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Else, Culwell", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Eveline, Wiemer", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Fairy, Tobin", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Nick, Schloss", attended));
+            studentAttendance.add(new IndividualStudentAttendance("Sara, Kosloski", !attended));
         }
-
         if (courseCode.equals("CSCI4176")) {
             numStudents = 14;
 
@@ -191,20 +191,20 @@ public class ProfIndividualAttendanceActivity extends AppCompatActivity {
             else
                 attendedPercent = (10.0 * 100.0 / numStudents);
 
-            studentAttendance.add(new IndividualStudentAttendance("Mi, Welle", !attended));
-            studentAttendance.add(new IndividualStudentAttendance("Berenice, Augustus", !attended));
-            studentAttendance.add(new IndividualStudentAttendance("Mikel, Nusbaum", attended));
-            studentAttendance.add(new IndividualStudentAttendance("Carlos, Clow", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Alonzo, Luera", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Barbie, Schmitmeyer", attended));
-            studentAttendance.add(new IndividualStudentAttendance("Gisele, Vanderveen", !attended));
-            studentAttendance.add(new IndividualStudentAttendance("Desire, Courville", !attended));
-            studentAttendance.add(new IndividualStudentAttendance("Wilton, Lipson", attended));
-            studentAttendance.add(new IndividualStudentAttendance("Sheridan, Henrich", !attended));
-            studentAttendance.add(new IndividualStudentAttendance("Karolyn, Soo", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Berenice, Augustus", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Carlos, Clow", !attended));
             studentAttendance.add(new IndividualStudentAttendance("Darnell, Bye", attended));
+            studentAttendance.add(new IndividualStudentAttendance("Desire, Courville", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Gisele, Vanderveen", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Karolyn, Soo", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Mi, Welle", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Mikel, Nusbaum", attended));
             studentAttendance.add(new IndividualStudentAttendance("Nannette, Zilnicki", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Sheridan, Henrich", !attended));
+            studentAttendance.add(new IndividualStudentAttendance("Wilton, Lipson", attended));
             studentAttendance.add(new IndividualStudentAttendance("Vi, Hoelscher", !attended));
-            studentAttendance.add(new IndividualStudentAttendance("Chia, Luera", !attended));
         }
         percentage.setText((int)attendedPercent+"%");
         rv.setAdapter(adapter);
