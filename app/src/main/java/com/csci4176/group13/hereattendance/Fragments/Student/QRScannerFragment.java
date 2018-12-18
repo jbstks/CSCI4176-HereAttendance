@@ -92,9 +92,10 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                     camera.start(qrCodeView.getHolder());
                     LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     Location location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-                    //Toast.makeText(getContext(), "loc"+location,Toast.LENGTH_LONG).show();
-                    uLat = location.getLatitude();
-                    uLong = location.getLongitude();
+                    if(location != null) {
+                        uLat = location.getLatitude();
+                        uLong = location.getLongitude();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
