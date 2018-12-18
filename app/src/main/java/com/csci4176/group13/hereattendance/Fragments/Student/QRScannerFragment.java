@@ -92,7 +92,7 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                     camera.start(qrCodeView.getHolder());
                     LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                     Location location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-                    if(location != null) {
+                    if (location != null) {
                         uLat = location.getLatitude();
                         uLong = location.getLongitude();
                     }
@@ -145,23 +145,23 @@ public class QRScannerFragment extends android.support.v4.app.Fragment {
                             building = "CS";
                             distance = Math.acos((Math.sin(Math.toRadians(uLat))*Math.sin(Math.toRadians(CS.latitude)))+
                                     (Math.cos(Math.toRadians(uLat))*Math.cos(Math.toRadians(CS.latitude))*
-                                            Math.cos(Math.toRadians(uLong)-Math.toRadians(CS.longitude))));
-                            //Log.d("IF1", "if1"+distance);
+                                            Math.cos(Math.toRadians(uLong)-Math.toRadians(CS.longitude))))*6371;
+                            Log.d("IF1", "if1"+distance);
                         } else if (codes.valueAt(0).displayValue.substring(0,8).equals("CSCI3130")) {
                             building = "LSC";
                             distance = Math.acos((Math.sin(Math.toRadians(uLat))*Math.sin(Math.toRadians(LSC.latitude)))+
                                     (Math.cos(Math.toRadians(uLat))*Math.cos(Math.toRadians(LSC.latitude))*
-                                            Math.cos(Math.toRadians(uLong)-Math.toRadians(LSC.longitude))));
-                            //Log.d("IF2", "if1"+distance);
+                                            Math.cos(Math.toRadians(uLong)-Math.toRadians(LSC.longitude)))) *6371;
+                            Log.d("IF2", "if1"+distance);
                         } else if (codes.valueAt(0).displayValue.substring(0,8).equals("CSCI3110")) {
                             building = "Tupper";
                             distance = Math.acos((Math.sin(Math.toRadians(uLat))*Math.sin(Math.toRadians(Tupper.latitude)))+
                                     (Math.cos(Math.toRadians(uLat))*Math.cos(Math.toRadians(Tupper.latitude))*
                                             Math.cos(Math.toRadians(uLong)-Math.toRadians(Tupper.longitude))))*6371;
-                            //Log.d("IF3", "if1"+distance);
+                            Log.d("IF3", "if1"+distance);
                         }
 
-                        if (distance <= 0.200){
+                        if (distance <= 0.150){
                             DatabaseUpdateRef.child(attendanceInfo[0]).child(attendanceInfo[3]).child("date").setValue(attendanceInfo[1] + " " + attendanceInfo[2]);
                         DatabaseUpdateRef.child(attendanceInfo[0]).child(attendanceInfo[3]).child("student").setValue("true").addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
